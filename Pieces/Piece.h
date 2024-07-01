@@ -6,18 +6,19 @@
 #define CHESS_PIECE_H
 
 #include <cstdlib>
+
 class Piece
 {
 public:
-    Piece(int x, int y, bool white);
+    Piece (int x, int y, bool white);
 
     int getX () const;
 
     int getY () const;
 
-    void move(int x, int y);
+    virtual void move (int x, int y);
 
-    virtual bool isMoveLegal(int x, int y);
+    virtual bool isMoveLegal (int x, int y);
 
     bool isWhite () const;
 

@@ -15,8 +15,8 @@ public:
 
     bool isMoveLegal (int x, int y) override;
 
-private:
-    bool legalRecursive (int x, int y);
+protected:
+    bool isMoveLegalRecursive (int x, int y);
 
     int endX;
     int endY;

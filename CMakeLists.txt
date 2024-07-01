@@ -13,4 +13,10 @@ add_executable(Chess main.cpp
         Pieces/Knight.h
         Pieces/Knight.cpp
         Pieces/Rook.h
-        Pieces/Rook.cpp)
+        Pieces/Rook.cpp
+        Pieces/Pawn.h
+        Pieces/Pawn.cpp
+        Pieces/Bishop.h
+        Pieces/Bishop.cpp
+        Pieces/Queen.h
+        Pieces/Queen.cpp)

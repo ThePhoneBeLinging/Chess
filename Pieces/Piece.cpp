@@ -10,7 +10,6 @@ Piece::Piece (int x, int y, bool white)
     this->_x = x;
     this->_y = y;
     this->_white = white;
-    Board::addPiece(this);
 }
 
 int Piece::getX () const
@@ -25,6 +24,10 @@ int Piece::getY () const
 
 void Piece::move (int x, int y)
 {
+    if (Board::pieceOnSquare(x, y) != nullptr)
+    {
+        Board::removePiece(Board::pieceOnSquare(x, y));
+    }
     this->_x = x;
     this->_y = y;
 }
@@ -41,6 +44,8 @@ bool Piece::isMoveLegal (int x, int y)
         return true;
     }
     if (Board::pieceOnSquare(x, y)->isWhite() == _white)
-    { return false; }
+    {
+        return false;
+    }
     return true;
 }

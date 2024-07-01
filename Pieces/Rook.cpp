@@ -31,7 +31,7 @@ bool Rook::isMoveLegal (int x, int y)
     return toMove;
 }
 
-bool Rook::legalRecursive (int x, int y)
+bool Rook::isMoveLegalRecursive (int x, int y)
 {
     if (this->getX() != this->endX || this->getY() != this->endY)
     {
@@ -68,5 +68,5 @@ bool Rook::legalRecursive (int x, int y)
             deltaY = - 1;
         }
     }
-    return legalRecursive(x + deltaX, y + deltaY);
+    return isMoveLegalRecursive(x + deltaX, y + deltaY);
 }
