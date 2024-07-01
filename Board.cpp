@@ -7,6 +7,8 @@
 #include "Pieces/Knight.h"
 #include "Pieces/King.h"
 #include "Pieces/Pawn.h"
+#include "Pieces/Queen.h"
+#include "Pieces/Bishop.h"
 
 std::list<std::shared_ptr<Piece>> Board::_pieces;
 
@@ -58,12 +60,17 @@ void Board::startGame ()
                 {
                     ptr = std::make_shared<Knight>(i, k, toMakeWhite);
                 }
+                else if (k == 3 || k == 6)
+                {
+                    ptr = std::make_shared<Bishop>(i, k, toMakeWhite);
+                }
                 else if (k == 4)
                 {
                     ptr = std::make_shared<King>(i, k, toMakeWhite);
                 }
                 else if (k == 5)
                 {
+                    ptr = std::make_shared<Queen>(i, k, toMakeWhite);
                 }
             }
             else if (i == 2 || i == 7)
