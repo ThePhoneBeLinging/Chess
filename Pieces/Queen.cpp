@@ -20,5 +20,7 @@ bool Queen::isMoveLegal (int x, int y)
     {
         return true;
     }
+    delete rook;
+    delete bishop;
     return false;
 }
