@@ -47,6 +47,7 @@ void UI::draw ()
             if (piece->getX() == pieceOnHand->getX() && piece->getY() == pieceOnHand->getY())
             {
                 DrawTexture(piece->getTexture(), GetMouseX(), GetMouseY(), WHITE);
+                continue;
             }
         }
         Texture2D texture = piece->getTexture();
@@ -66,8 +67,8 @@ void UI::onClick (Vector2 position)
 
 void UI::onRelease (Vector2 position)
 {
-    int xToGet = (int) position.x;
-    int yToGet = (int) position.y;
+    int xToGet = (int) position.x / tileSize;
+    int yToGet = (int) position.y / tileSize;
     if (pieceOnHand != nullptr)
     {
         if (pieceOnHand->isMoveLegal(xToGet, yToGet))
