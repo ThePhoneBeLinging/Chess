@@ -11,6 +11,7 @@
 #include "Pieces/Bishop.h"
 
 std::list<std::shared_ptr<Piece>> Board::_pieces;
+bool Board::whiteTurn = true;
 
 std::list<std::shared_ptr<Piece>> Board::getPieces ()
 {

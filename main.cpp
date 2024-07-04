@@ -9,6 +9,7 @@
 int main ()
 {
     InitWindow(1200, 800, "Dean");
+    SetTargetFPS(60);
     UI *ui = new UI();
     Board::startGame();
     while (! WindowShouldClose())

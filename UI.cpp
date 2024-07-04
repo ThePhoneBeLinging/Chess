@@ -13,6 +13,14 @@ UI::UI ()
 
 void UI::draw ()
 {
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+    {
+        this->onClick(GetMousePosition());
+    }
+    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+    {
+        this->onRelease(GetMousePosition());
+    }
     ClearBackground(BLACK);
     BeginDrawing();
     bool black = false;
@@ -38,11 +46,34 @@ void UI::draw ()
         {
             if (piece->getX() == pieceOnHand->getX() && piece->getY() == pieceOnHand->getY())
             {
-                continue;
+                DrawTexture(piece->getTexture(), GetMouseX(), GetMouseY(), WHITE);
             }
         }
         Texture2D texture = piece->getTexture();
         DrawTexture(texture, piece->getY() * tileSize, piece->getX() * tileSize, WHITE);
     }
     EndDrawing();
+}
+
+void UI::onClick (Vector2 position)
+{
+    if (pieceOnHand != nullptr)
+    { return; }
+    int xToGet = (int) position.x / tileSize;
+    int yToGet = (int) position.y / tileSize;
+    this->pieceOnHand = Board::pieceOnSquare(yToGet, xToGet);
+}
+
+void UI::onRelease (Vector2 position)
+{
+    int xToGet = (int) position.x;
+    int yToGet = (int) position.y;
+    if (pieceOnHand != nullptr)
+    {
+        if (pieceOnHand->isMoveLegal(xToGet, yToGet))
+        {
+            pieceOnHand->move(xToGet, yToGet);
+        }
+    }
+    pieceOnHand = nullptr;
 }

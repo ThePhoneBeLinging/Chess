@@ -27,7 +27,14 @@ void Piece::move (int x, int y)
 {
     if (Board::pieceOnSquare(x, y) != nullptr)
     {
-        Board::removePiece(Board::pieceOnSquare(x, y));
+        if (Board::pieceOnSquare(x, y)->isWhite() != this->_white)
+        {
+            Board::removePiece(Board::pieceOnSquare(x, y));
+        }
+        else
+        {
+            return;
+        }
     }
     this->_x = x;
     this->_y = y;

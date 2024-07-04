@@ -7,6 +7,7 @@
 
 #include "Board.h"
 #include <cstdlib>
+#include <iostream>
 
 class UI
 {
@@ -18,6 +19,10 @@ public:
     static int tileSize;
 private:
     std::shared_ptr<Piece> pieceOnHand;
+
+    void onClick (Vector2 position);
+
+    void onRelease (Vector2 position);
 };
 
 

@@ -22,6 +22,8 @@ public:
 
     static void startGame ();
 
+    static bool whiteTurn;
+
 private:
     static std::list<std::shared_ptr<Piece>> _pieces;
 };
