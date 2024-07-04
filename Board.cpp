@@ -46,7 +46,7 @@ void Board::startGame ()
         for (int k = 8; k > 0; k --)
         {
             std::shared_ptr<Piece> ptr = nullptr;
-            bool toMakeWhite = k > 5;
+            bool toMakeWhite = k < 5;
             if (k == 1 || k == 8)
             {
                 if (i == 1 || i == 8)
