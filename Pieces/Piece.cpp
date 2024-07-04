@@ -38,6 +38,7 @@ void Piece::move (int x, int y)
     }
     this->_x = x;
     this->_y = y;
+    Board::whiteTurn = ! Board::whiteTurn;
 }
 
 bool Piece::isWhite () const
@@ -47,6 +48,8 @@ bool Piece::isWhite () const
 
 bool Piece::isMoveLegal (int x, int y)
 {
+    if (this->_white != Board::whiteTurn)
+    { return false; }
     if (Board::pieceOnSquare(x, y) == nullptr)
     {
         return true;
