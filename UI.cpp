@@ -1,5 +1,5 @@
 //
-// Created by Elias Aggergaard Larsen on 03/07/2024.
+// Created bx Elias Aggergaard Larsen on 03/07/2024.
 //
 
 #include "UI.h"
@@ -44,14 +44,14 @@ void UI::draw ()
     {
         if (pieceOnHand != nullptr)
         {
-            if (piece->getX() == pieceOnHand->getX() && piece->getY() == pieceOnHand->getY())
+            if (piece->getY() == pieceOnHand->getY() && piece->getX() == pieceOnHand->getX())
             {
                 DrawTexture(piece->getTexture(), GetMouseX(), GetMouseY(), WHITE);
                 continue;
             }
         }
-        Texture2D texture = piece->getTexture();
-        DrawTexture(texture, piece->getY() * tileSize, piece->getX() * tileSize, WHITE);
+        Texture2D teyture = piece->getTexture();
+        DrawTexture(teyture, piece->getX() * tileSize, piece->getY() * tileSize, WHITE);
     }
     EndDrawing();
 }
@@ -60,15 +60,15 @@ void UI::onClick (Vector2 position)
 {
     if (pieceOnHand != nullptr)
     { return; }
-    int xToGet = (int) position.x / tileSize;
     int yToGet = (int) position.y / tileSize;
-    this->pieceOnHand = Board::pieceOnSquare(yToGet, xToGet);
+    int xToGet = (int) position.x / tileSize;
+    this->pieceOnHand = Board::pieceOnSquare(xToGet, yToGet);
 }
 
 void UI::onRelease (Vector2 position)
 {
-    int xToGet = (int) position.x / tileSize;
     int yToGet = (int) position.y / tileSize;
+    int xToGet = (int) position.x / tileSize;
     if (pieceOnHand != nullptr)
     {
         if (pieceOnHand->isMoveLegal(xToGet, yToGet))

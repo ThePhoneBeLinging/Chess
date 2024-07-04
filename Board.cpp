@@ -41,40 +41,36 @@ std::shared_ptr<Piece> Board::pieceOnSquare (int x, int y)
 
 void Board::startGame ()
 {
-    bool toMakeWhite = true;
-    for (int i = 1; i < 9; i ++)
+    for (int i = 8; i > 0; i --)
     {
-        for (int k = 1; k < 9; k ++)
+        for (int k = 8; k > 0; k --)
         {
             std::shared_ptr<Piece> ptr = nullptr;
-            if (i == 5)
+            bool toMakeWhite = k > 5;
+            if (k == 1 || k == 8)
             {
-                toMakeWhite = false;
-            }
-            if (i == 1 || i == 8)
-            {
-                if (k == 1 || k == 8)
+                if (i == 1 || i == 8)
                 {
                     ptr = std::make_shared<Rook>(i, k, toMakeWhite);
                 }
-                else if (k == 2 || k == 7)
+                else if (i == 2 || i == 7)
                 {
                     ptr = std::make_shared<Knight>(i, k, toMakeWhite);
                 }
-                else if (k == 3 || k == 6)
+                else if (i == 3 || i == 6)
                 {
                     ptr = std::make_shared<Bishop>(i, k, toMakeWhite);
                 }
-                else if (k == 4)
+                else if (i == 4)
                 {
                     ptr = std::make_shared<King>(i, k, toMakeWhite);
                 }
-                else if (k == 5)
+                else if (i == 5)
                 {
                     ptr = std::make_shared<Queen>(i, k, toMakeWhite);
                 }
             }
-            else if (i == 2 || i == 7)
+            else if (k == 2 || k == 7)
             {
                 ptr = std::make_shared<Pawn>(i, k, toMakeWhite);
             }
