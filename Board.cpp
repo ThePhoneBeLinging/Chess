@@ -63,11 +63,11 @@ void Board::startGame ()
                 }
                 else if (i == 4)
                 {
-                    ptr = std::make_shared<King>(i, k, toMakeWhite);
+                    ptr = std::make_shared<Queen>(i, k, toMakeWhite);
                 }
                 else if (i == 5)
                 {
-                    ptr = std::make_shared<Queen>(i, k, toMakeWhite);
+                    ptr = std::make_shared<King>(i, k, toMakeWhite);
                 }
             }
             else if (k == 2 || k == 7)
