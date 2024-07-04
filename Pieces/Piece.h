@@ -6,6 +6,7 @@
 #define CHESS_PIECE_H
 
 #include <cstdlib>
+#include "raylib.h"
 
 class Piece
 {
@@ -22,10 +23,15 @@ public:
 
     bool isWhite () const;
 
+    Texture2D getTexture ();
+
+    void setTexture (Texture2D texture);
+
 private:
     int _x;
     int _y;
     bool _white;
+    Texture2D texture;
 };
 
 

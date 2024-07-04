@@ -4,6 +4,7 @@
 
 #include "Piece.h"
 #include "../Board.h"
+#include "../UI.h"
 
 Piece::Piece (int x, int y, bool white)
 {
@@ -48,4 +49,16 @@ bool Piece::isMoveLegal (int x, int y)
         return false;
     }
     return true;
+}
+
+Texture2D Piece::getTexture ()
+{
+    return texture;
+}
+
+void Piece::setTexture (Texture2D texture)
+{
+    Piece::texture = texture;
+    this->texture.height = UI::tileSize;
+    this->texture.width = UI::tileSize;
 }

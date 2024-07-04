@@ -8,7 +8,10 @@
 Pawn::Pawn (int x, int y, bool white) :
         Piece(x, y, white)
 {
-
+    const char fileStart = white ? 'W' : 'B';
+    char fileName[50];
+    snprintf(fileName, 50, "../Resources/ChessPieces/%cPawn.png", fileStart);
+    this->setTexture(LoadTexture(fileName));
 }
 
 bool Pawn::isMoveLegal (int x, int y)

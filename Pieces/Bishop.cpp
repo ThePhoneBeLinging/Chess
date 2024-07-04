@@ -8,7 +8,9 @@
 Bishop::Bishop (int x, int y, bool white) :
         Piece(x, y, white)
 {
-
+    char fileName[50];
+    snprintf(fileName, 50, "../Resources/ChessPieces/%cBishop.png", white ? 'W' : 'B');
+    this->setTexture(LoadTexture(fileName));
 }
 
 bool Bishop::isMoveLegal (int x, int y)

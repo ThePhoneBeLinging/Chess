@@ -20,7 +20,6 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
         add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
     endif ()
 endif ()
-
 add_executable(Chess main.cpp
         Pieces/Piece.h
         Pieces/Piece.cpp
@@ -37,4 +36,7 @@ add_executable(Chess main.cpp
         Pieces/Bishop.h
         Pieces/Bishop.cpp
         Pieces/Queen.h
-        Pieces/Queen.cpp)
+        Pieces/Queen.cpp
+        UI.h
+        UI.cpp)
+target_link_libraries(${PROJECT_NAME} raylib)
