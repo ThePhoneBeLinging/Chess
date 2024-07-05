@@ -17,9 +17,6 @@ public:
 
 protected:
     bool isMoveLegalRecursive (int x, int y);
-
-    int endX;
-    int endY;
 };
 
 

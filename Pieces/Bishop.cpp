@@ -15,8 +15,6 @@ Bishop::Bishop (int x, int y, bool white) :
 
 bool Bishop::isMoveLegal (int x, int y)
 {
-    this->endX = x;
-    this->endY = y;
     int deltaX = this->getX() - x;
     int deltaY = this->getY() - y;
     if (std::abs(deltaX) != std::abs(deltaY))
@@ -31,7 +29,8 @@ bool Bishop::isMoveLegal (int x, int y)
     { deltaY = 1; }
     else
     { deltaY = - 1; }
-    if (!Piece::isMoveLegal(x,y)) return false;
+    if (! Piece::isMoveLegal(x, y))
+    { return false; }
     x += deltaX;
     y += deltaY;
     return isMoveLegalRecursive(x, y);

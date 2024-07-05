@@ -16,8 +16,6 @@ Rook::Rook (int x, int y, bool white) :
 
 bool Rook::isMoveLegal (int x, int y)
 {
-    this->endX = x;
-    this->endY = y;
     int deltaX = this->getX() - x;
     int deltaY = this->getY() - y;
     if (deltaX != 0 && deltaY != 0)
@@ -32,7 +30,8 @@ bool Rook::isMoveLegal (int x, int y)
     { deltaY = 1; }
     else if (deltaY != 0)
     { deltaY = - 1; }
-    if (!Piece::isMoveLegal(x,y)) return false;
+    if (! Piece::isMoveLegal(x, y))
+    { return false; }
     x += deltaX;
     y += deltaY;
     return isMoveLegalRecursive(x, y);
