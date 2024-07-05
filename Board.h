@@ -6,6 +6,7 @@
 #define CHESS_BOARD_H
 
 #include "Pieces/Piece.h"
+#include "Move.h"
 #include <list>
 #include <memory>
 
@@ -21,6 +22,8 @@ public:
     static std::shared_ptr<Piece> pieceOnSquare (int x, int y);
 
     static void startGame ();
+
+    static std::list<Move> getAllLegalMoves ();
 
     static bool whiteTurn;
 

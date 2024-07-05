@@ -83,3 +83,20 @@ void Board::removePiece (std::shared_ptr<Piece> piece)
 {
     Board::_pieces.remove(piece);
 }
+
+std::list<Move> Board::getAllLegalMoves ()
+{
+    std::list<Move> moves;
+    for (int i = 1; i < 9; i ++)
+    {
+        for (int k = 1; k < 9; k ++)
+        {
+            for (std::shared_ptr<Piece> piece: Board::_pieces)
+            {
+                Move move = Move(piece->getX(), piece->getY(), i, k);
+                if (piece->isMoveLegal(i, k))
+                { moves.push_back(move); }
+            }
+        }
+    }
+}
