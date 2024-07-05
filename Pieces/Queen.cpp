@@ -14,17 +14,22 @@ Queen::Queen (int x, int y, bool white) :
     char fileName[50];
     snprintf(fileName, 50, "../Resources/ChessPieces/%cQueen.png", fileStart);
     this->setTexture(LoadTexture(fileName));
+    this->mRook = new Rook(this->getX(), this->getY(), this->isWhite());
+    this->mBishop = new Bishop(this->getX(), this->getY(), this->isWhite());
 }
 
 bool Queen::isMoveLegal (int x, int y)
 {
-    Piece *rook = new Rook(this->getX(), this->getY(), this->isWhite());
-    Piece *bishop = new Bishop(this->getX(), this->getY(), this->isWhite());
-    if (rook->isMoveLegal(x, y) || bishop->isMoveLegal(x, y))
+    if (mRook->isMoveLegal(x, y) || mBishop->isMoveLegal(x, y))
     {
         return true;
     }
-    delete rook;
-    delete bishop;
     return false;
+}
+
+void Queen::move (int x, int y)
+{
+    mRook->move(x, y);
+    mBishop->move(x, y);
+    Piece::move(x, y);
 }

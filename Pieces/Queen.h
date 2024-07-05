@@ -7,6 +7,8 @@
 
 
 #include "Piece.h"
+#include "Rook.h"
+#include "Bishop.h"
 
 class Queen : public Piece
 {
@@ -15,7 +17,11 @@ public:
 
     bool isMoveLegal (int x, int y) override;
 
+    void move (int x, int y) override;
+
 private:
+    Rook *mRook;
+    Bishop *mBishop;
 };
 
 
