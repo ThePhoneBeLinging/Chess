@@ -19,7 +19,8 @@ bool Pawn::isMoveLegal (int x, int y)
     {
         return false;
     }
-    if (this->getX() != x && Board::pieceOnSquare(x,y) == nullptr) return false;
+    if (this->getX() != x && Board::pieceOnSquare(x, y) == nullptr)
+    { return false; }
 
 
     if (std::abs(x - this->getX()) > 1)
@@ -27,11 +28,12 @@ bool Pawn::isMoveLegal (int x, int y)
         return false;
     }
 
-    if (!Piece::isMoveLegal(x,y)) return false;
+    if (! Piece::isMoveLegal(x, y))
+    { return false; }
 
-    if (std::abs(x - this->getX()) > 0)
+    if (std::abs(x - this->getX()) > 0 && std::abs(y - this->getY()) == 1)
     {
-        if (Board::pieceOnSquare(x, y) != nullptr && Board::pieceOnSquare(x, y)->isWhite() != this->isWhite())
+        if ((this->isWhite() && this->getY() - y == - 1) || (! this->isWhite() && this->getY() - y == 1))
         {
             return true;
         }
@@ -52,13 +54,13 @@ bool Pawn::isMoveLegal (int x, int y)
         }
     }
 
-    if (this->isWhite() && y - 1 == this->getY())
+    if (this->isWhite() && y - 1 == this->getY() && this->getX() == x)
     {
         return true;
     }
     else
     {
-        if (y + 1 == this->getY())
+        if (y + 1 == this->getY() && this->getX() == x)
         {
             return true;
         }
