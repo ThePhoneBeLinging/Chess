@@ -19,11 +19,15 @@ bool Pawn::isMoveLegal (int x, int y)
     {
         return false;
     }
+    if (this->getX() != x && Board::pieceOnSquare(x,y) == nullptr) return false;
+
 
     if (std::abs(x - this->getX()) > 1)
     {
         return false;
     }
+
+    if (!Piece::isMoveLegal(x,y)) return false;
 
     if (std::abs(x - this->getX()) > 0)
     {

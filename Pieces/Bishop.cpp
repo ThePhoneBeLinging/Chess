@@ -31,10 +31,7 @@ bool Bishop::isMoveLegal (int x, int y)
     { deltaY = 1; }
     else
     { deltaY = - 1; }
-    if (Board::pieceOnSquare(x, y) != nullptr && Board::pieceOnSquare(x, y)->isWhite() == this->isWhite())
-    {
-        return false;
-    }
+    if (!Piece::isMoveLegal(x,y)) return false;
     x += deltaX;
     y += deltaY;
     return isMoveLegalRecursive(x, y);

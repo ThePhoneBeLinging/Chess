@@ -16,6 +16,6 @@ int main ()
     {
         ui->draw();
     }
-    //CloseWindow();
+    CloseWindow();
     return 0;
 }

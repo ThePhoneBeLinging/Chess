@@ -17,6 +17,7 @@ King::King (int x, int y, bool white) :
 
 bool King::isMoveLegal (int x, int y)
 {
+    if (!Piece::isMoveLegal(x,y)) return false;
     int deltaX = std::abs(x - this->getX());
     int deltaY = std::abs(y - this->getY());
 
