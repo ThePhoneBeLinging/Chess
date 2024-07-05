@@ -79,6 +79,7 @@ void Board::startGame ()
             Board::addPiece(ptr);
         }
     }
+    Board::updateAllLegalMoves();
 }
 
 void Board::removePiece (std::shared_ptr<Piece> piece)
@@ -93,6 +94,7 @@ std::list<Move> Board::getAllLegalMoves ()
 
 void Board::updateAllLegalMoves ()
 {
+    Board::_moves.clear();
     for (int i = 1; i < 9; i ++)
     {
         for (int k = 1; k < 9; k ++)
@@ -102,12 +104,11 @@ void Board::updateAllLegalMoves ()
                 if (piece->isMoveLegal(i, k))
                 {
                     Board::_moves.emplace_back(piece->getX(), piece->getY(), i, k);
-                    std::cout << piece->getX() << "," << piece->getY() << " -> ";
-                    std::cout << i << "," << k << std::endl;
                 }
             }
         }
     }
+    std::cout << Board::_moves.size() << std::endl;
 }
 
 std::list<Move> Board::getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece)
