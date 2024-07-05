@@ -33,9 +33,16 @@ bool Pawn::isMoveLegal (int x, int y)
         }
     }
 
-    if (this->isWhite() && this->getY() == 2 && ! this->hasMoved)
+    if (this->isWhite() && this->getY() == 2 && ! this->isHasMoved())
     {
         if (y == 4 && Board::pieceOnSquare(x, 3) == nullptr && this->getX() == x)
+        {
+            return true;
+        }
+    }
+    else if (! this->isWhite() && this->getY() == 7 && ! this->isHasMoved())
+    {
+        if (y == 5 && Board::pieceOnSquare(x, 6) == nullptr && this->getX() == x)
         {
             return true;
         }
@@ -53,20 +60,4 @@ bool Pawn::isMoveLegal (int x, int y)
         }
     }
     return false;
-}
-
-bool Pawn::isHasMoved () const
-{
-    return hasMoved;
-}
-
-void Pawn::setHasMoved (bool hasMoved)
-{
-    Pawn::hasMoved = hasMoved;
-}
-
-void Pawn::move (int x, int y)
-{
-    this->hasMoved = true;
-    Piece::move(x, y);
 }

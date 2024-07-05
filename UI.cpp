@@ -23,7 +23,6 @@ void UI::draw ()
     }
     ClearBackground(BLACK);
     BeginDrawing();
-    bool black = false;
     Color color = BLACK;
     for (int i = 1; i < 9; i ++)
     {

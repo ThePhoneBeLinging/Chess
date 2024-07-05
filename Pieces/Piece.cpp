@@ -11,6 +11,7 @@ Piece::Piece (int x, int y, bool white)
     this->_x = x;
     this->_y = y;
     this->_white = white;
+    this->hasMoved = false;
 }
 
 int Piece::getX () const
@@ -36,9 +37,11 @@ void Piece::move (int x, int y)
             return;
         }
     }
+
     this->_x = x;
     this->_y = y;
     Board::whiteTurn = ! Board::whiteTurn;
+    this->hasMoved = true;
 }
 
 bool Piece::isWhite () const
@@ -48,7 +51,9 @@ bool Piece::isWhite () const
 
 bool Piece::isMoveLegal (int x, int y)
 {
-    if (this->_white != Board::whiteTurn)
+    if (y > 8 || y < 1)
+    { return false; }
+    if (x > 8 || x < 1)
     { return false; }
     if (Board::pieceOnSquare(x, y) == nullptr)
     {
@@ -71,4 +76,14 @@ void Piece::setTexture (Texture2D texture)
     Piece::texture = texture;
     this->texture.height = UI::tileSize;
     this->texture.width = UI::tileSize;
+}
+
+bool Piece::isHasMoved () const
+{
+    return hasMoved;
+}
+
+void Piece::setHasMoved (bool hasMoved)
+{
+    Piece::hasMoved = hasMoved;
 }

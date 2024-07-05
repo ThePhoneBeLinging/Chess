@@ -15,14 +15,7 @@ public:
 
     bool isMoveLegal (int x, int y) override;
 
-    bool isHasMoved () const;
-
-    void setHasMoved (bool hasMoved);
-
-    void move (int x, int y) override;
-
 private:
-    bool hasMoved = false;
 };
 
 

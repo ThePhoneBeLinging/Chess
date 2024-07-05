@@ -23,10 +23,20 @@ bool Bishop::isMoveLegal (int x, int y)
     {
         return false;
     }
+    if (deltaX > 0)
+    { deltaX = 1; }
+    else
+    { deltaX = - 1; }
+    if (deltaY > 0)
+    { deltaY = 1; }
+    else
+    { deltaY = - 1; }
     if (Board::pieceOnSquare(x, y) != nullptr && Board::pieceOnSquare(x, y)->isWhite() == this->isWhite())
     {
         return false;
     }
+    x += deltaX;
+    y += deltaY;
     return isMoveLegalRecursive(x, y);
 }
 
@@ -42,5 +52,13 @@ bool Bishop::isMoveLegalRecursive (int x, int y)
     }
     int deltaX = this->getX() - x;
     int deltaY = this->getY() - y;
+    if (deltaX > 0)
+    { deltaX = 1; }
+    else
+    { deltaX = - 1; }
+    if (deltaY > 0)
+    { deltaY = 1; }
+    else
+    { deltaY = - 1; }
     return isMoveLegalRecursive(x + deltaX, y + deltaY);
 }

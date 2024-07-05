@@ -27,11 +27,16 @@ public:
 
     void setTexture (Texture2D texture);
 
+    bool isHasMoved () const;
+
+    void setHasMoved (bool hasMoved);
+
 private:
     int _x;
     int _y;
     bool _white;
     Texture2D texture;
+    bool hasMoved;
 };
 
 
