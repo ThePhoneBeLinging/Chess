@@ -11,6 +11,7 @@
 #include "Pieces/Bishop.h"
 
 std::list<std::shared_ptr<Piece>> Board::_pieces;
+std::list<Move> Board::_moves;
 bool Board::whiteTurn = true;
 
 std::list<std::shared_ptr<Piece>> Board::getPieces ()
@@ -86,17 +87,33 @@ void Board::removePiece (std::shared_ptr<Piece> piece)
 
 std::list<Move> Board::getAllLegalMoves ()
 {
-    std::list<Move> moves;
+    return Board::_moves;
+}
+
+void Board::updateAllLegalMoves ()
+{
     for (int i = 1; i < 9; i ++)
     {
         for (int k = 1; k < 9; k ++)
         {
-            for (std::shared_ptr<Piece> piece: Board::_pieces)
+            for (const std::shared_ptr<Piece> &piece: Board::_pieces)
             {
-                Move move = Move(piece->getX(), piece->getY(), i, k);
                 if (piece->isMoveLegal(i, k))
-                { moves.push_back(move); }
+                { Board::_moves.emplace_back(piece->getX(), piece->getY(), i, k); }
             }
         }
     }
+}
+
+std::list<Move> Board::getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece)
+{
+    std::list<Move> moves;
+    for (Move move: Board::_moves)
+    {
+        if (move.getXFrom() == piece->getX() && move.getYFrom() == piece->getY())
+        {
+            moves.push_back(move);
+        }
+    }
+    return moves;
 }

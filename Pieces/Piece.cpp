@@ -42,6 +42,7 @@ void Piece::move (int x, int y)
     this->_y = y;
     Board::whiteTurn = ! Board::whiteTurn;
     this->hasMoved = true;
+    Board::updateAllLegalMoves();
 }
 
 bool Piece::isWhite () const

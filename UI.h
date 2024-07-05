@@ -20,6 +20,8 @@ public:
 private:
     std::shared_ptr<Piece> pieceOnHand;
 
+    std::shared_ptr<Piece> selectedPiece;
+
     void onClick (Vector2 position);
 
     void onRelease (Vector2 position);
