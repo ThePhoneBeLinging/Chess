@@ -16,61 +16,50 @@ Rook::Rook (int x, int y, bool white) :
 
 bool Rook::isMoveLegal (int x, int y)
 {
-    if (! Piece::isMoveLegal(x, y))
-    {
-        return false;
-    }
-    if (this->getX() != x && this->getY() != y)
-    {
-        return false;
-    }
     this->endX = x;
     this->endY = y;
-
-    bool toMove = Piece::isMoveLegal(x, y);
-    if (toMove)
+    int deltaX = this->getX() - x;
+    int deltaY = this->getY() - y;
+    if (deltaX != 0 && deltaY != 0)
     {
-        Piece::move(x, y);
+        return false;
     }
-    return toMove;
+    if (deltaX > 0)
+    { deltaX = 1; }
+    else if (deltaX != 0)
+    { deltaX = - 1; }
+    if (deltaY > 0)
+    { deltaY = 1; }
+    else if (deltaY != 0)
+    { deltaY = - 1; }
+    if (Board::pieceOnSquare(x, y) != nullptr && Board::pieceOnSquare(x, y)->isWhite() == this->isWhite())
+    {
+        return false;
+    }
+    x += deltaX;
+    y += deltaY;
+    return isMoveLegalRecursive(x, y);
 }
 
 bool Rook::isMoveLegalRecursive (int x, int y)
 {
-    if (this->getX() != this->endX || this->getY() != this->endY)
-    {
-        if (Board::pieceOnSquare(x, y) != nullptr)
-        {
-            return false;
-        }
-    }
-    int deltaX = x - this->getX();
-    int deltaY = y - this->getY();
-    if (deltaX == 0 && deltaY == 0)
+    if (x == this->getX() && y == this->getY())
     {
         return true;
     }
-    if (deltaX != 0)
+    if (Board::pieceOnSquare(x, y) != nullptr)
     {
-        if (deltaX > 0)
-        {
-            deltaX = 1;
-        }
-        else
-        {
-            deltaX = - 1;
-        }
+        return false;
     }
-    if (deltaY != 0)
-    {
-        if (deltaY > 0)
-        {
-            deltaY = 1;
-        }
-        if (deltaY < 0)
-        {
-            deltaY = - 1;
-        }
-    }
+    int deltaX = this->getX() - x;
+    int deltaY = this->getY() - y;
+    if (deltaX > 0)
+    { deltaX = 1; }
+    else if (deltaX != 0)
+    { deltaX = - 1; }
+    if (deltaY > 0)
+    { deltaY = 1; }
+    else if (deltaY != 0)
+    { deltaY = - 1; }
     return isMoveLegalRecursive(x + deltaX, y + deltaY);
 }
