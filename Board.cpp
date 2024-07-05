@@ -2,6 +2,7 @@
 // Created by Elias Aggergaard Larsen on 30/06/2024.
 //
 
+#include <iostream>
 #include "Board.h"
 #include "Pieces/Rook.h"
 #include "Pieces/Knight.h"
@@ -99,7 +100,11 @@ void Board::updateAllLegalMoves ()
             for (const std::shared_ptr<Piece> &piece: Board::_pieces)
             {
                 if (piece->isMoveLegal(i, k))
-                { Board::_moves.emplace_back(piece->getX(), piece->getY(), i, k); }
+                {
+                    Board::_moves.emplace_back(piece->getX(), piece->getY(), i, k);
+                    std::cout << piece->getX() << "," << piece->getY() << " -> ";
+                    std::cout << i << "," << k << std::endl;
+                }
             }
         }
     }

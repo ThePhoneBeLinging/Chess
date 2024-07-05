@@ -41,7 +41,6 @@ void UI::draw ()
     }
     if (this->selectedPiece != nullptr)
     {
-        
     }
     for (std::shared_ptr<Piece> piece: Board::getPieces())
     {
@@ -66,10 +65,12 @@ void UI::onClick (Vector2 position)
     if (this->selectedPiece != nullptr && selectedPiece->isMoveLegal(xToGet, yToGet))
     {
         selectedPiece->move(xToGet, yToGet);
-        selectedPiece = nullptr;
     }
-    this->selectedPiece = Board::pieceOnSquare(xToGet, yToGet);
-    this->pieceOnHand = Board::pieceOnSquare(xToGet, yToGet);
+    if (selectedPiece == nullptr)
+    { this->selectedPiece = Board::pieceOnSquare(xToGet, yToGet); }
+    else
+    { selectedPiece = nullptr; }
+    //this->pieceOnHand = Board::pieceOnSquare(xToGet, yToGet);
 
 }
 
