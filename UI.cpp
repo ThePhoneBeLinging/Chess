@@ -39,8 +39,13 @@ void UI::draw ()
             DrawRectangle(k * tileSize, i * tileSize, tileSize, tileSize, color);
         }
     }
-    if (this->selectedPiece != nullptr)
+    if (this->pieceOnHand != nullptr)
     {
+        for (Move move: Board::getAllLegalMoves())
+        {
+            DrawRectangle(move.getXTo() * tileSize, move.getYTo() * tileSize, tileSize, tileSize,
+                          ColorAlpha(BLUE, 0.3));
+        }
     }
     for (std::shared_ptr<Piece> piece: Board::getPieces())
     {
@@ -70,7 +75,7 @@ void UI::onClick (Vector2 position)
     { this->selectedPiece = Board::pieceOnSquare(xToGet, yToGet); }
     else
     { selectedPiece = nullptr; }
-    //this->pieceOnHand = Board::pieceOnSquare(xToGet, yToGet);
+    this->pieceOnHand = Board::pieceOnSquare(xToGet, yToGet);
 
 }
 
