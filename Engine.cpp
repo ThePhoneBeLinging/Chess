@@ -3,6 +3,7 @@
 //
 
 #include <memory>
+#include <iostream>
 #include "Engine.h"
 #include "Pieces/Piece.h"
 #include "Board.h"
@@ -33,7 +34,7 @@ int Engine::calculateMaterialDifference ()
 
 Move *Engine::getBestMove ()
 {
-    int maxDepth = 3;
+    int maxDepth = 2;
     int minRating = - 33333;
     int maxRating = - 33333;
     int indexOfMin = 0;

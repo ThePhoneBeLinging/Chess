@@ -106,6 +106,4 @@ void Board::updateAllLegalMoves ()
             Board::_moves.push_back(move);
         }
     }
-    Board::amountOfCalls ++;
-    std::cout << "Amount of updates of legal moves: " << Board::amountOfCalls << std::endl;
 }
