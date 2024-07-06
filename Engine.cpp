@@ -32,9 +32,9 @@ int Engine::calculateMaterialDifference ()
 
 Move *Engine::getBestMove ()
 {
-    for (Move *move: Board::getAllLegalMoves())
+    for (Move move: Board::getAllLegalMoves())
     {
-        return move;
+        return new Move(move.getXFrom(), move.getYFrom(), move.getXTo(), move.getYTo());
     }
     return nullptr;
 }

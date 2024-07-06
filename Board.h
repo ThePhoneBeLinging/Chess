@@ -23,9 +23,9 @@ public:
 
     static void startGame ();
 
-    static std::list<Move *> getAllLegalMoves ();
+    static std::list<Move> getAllLegalMoves ();
 
-    static std::list<Move *> getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece);
+    static std::list<Move> getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece);
 
     static bool whiteTurn;
 
@@ -33,7 +33,7 @@ public:
 
 private:
     static std::list<std::shared_ptr<Piece>> _pieces;
-    static std::list<Move *> _moves;
+    static std::list<Move> _moves;
 };
 
 

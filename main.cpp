@@ -5,6 +5,7 @@
 #include "Board.h"
 #include "raylib.h"
 #include "UI.h"
+#include "Engine.h"
 
 int main ()
 {
@@ -15,6 +16,10 @@ int main ()
     while (! WindowShouldClose())
     {
         ui->draw();
+        if (! Board::whiteTurn)
+        {
+            Engine::getBestMove()->execute();
+        }
     }
     CloseWindow();
     return 0;

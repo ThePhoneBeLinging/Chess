@@ -12,7 +12,7 @@
 #include "Pieces/Bishop.h"
 
 std::list<std::shared_ptr<Piece>> Board::_pieces;
-std::list<Move *> Board::_moves;
+std::list<Move> Board::_moves;
 bool Board::whiteTurn = true;
 
 std::list<std::shared_ptr<Piece>> Board::getPieces ()
@@ -87,7 +87,7 @@ void Board::removePiece (std::shared_ptr<Piece> piece)
     Board::_pieces.remove(piece);
 }
 
-std::list<Move *> Board::getAllLegalMoves ()
+std::list<Move> Board::getAllLegalMoves ()
 {
     return Board::_moves;
 }
@@ -103,7 +103,7 @@ void Board::updateAllLegalMoves ()
             {
                 if (piece->isMoveLegal(i, k))
                 {
-                    Move *move = new Move(piece->getX(), piece->getY(), i, k);
+                    Move move = Move(piece->getX(), piece->getY(), i, k);
                     Board::_moves.push_back(move);
                 }
             }
@@ -111,12 +111,12 @@ void Board::updateAllLegalMoves ()
     }
 }
 
-std::list<Move *> Board::getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece)
+std::list<Move> Board::getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece)
 {
-    std::list<Move *> moves;
-    for (Move *move: Board::_moves)
+    std::list<Move> moves;
+    for (Move move: Board::_moves)
     {
-        if (move->getXFrom() == piece->getX() && move->getYFrom() == piece->getY())
+        if (move.getXFrom() == piece->getX() && move.getYFrom() == piece->getY())
         {
             moves.push_back(move);
         }
