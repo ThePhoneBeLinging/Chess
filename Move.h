@@ -31,11 +31,17 @@ public:
 
     void setYTo (int yTo);
 
+    void execute ();
+
+    void undo ();
+
 private:
     int _xFrom;
     int _xTo;
     int _yFrom;
     int _yTo;
+    std::shared_ptr<Piece> pieceToMove;
+    std::shared_ptr<Piece> pieceToCapture;
 };
 
 

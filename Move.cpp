@@ -3,6 +3,7 @@
 //
 
 #include "Move.h"
+#include "Board.h"
 
 int Move::getXFrom () const
 {
@@ -50,4 +51,17 @@ Move::Move (int xFrom, int xTo, int yFrom, int yTo)
     this->_xTo = xTo;
     this->_yFrom = yFrom;
     this->_yTo = yTo;
+}
+
+void Move::execute ()
+{
+    this->pieceToMove = Board::pieceOnSquare(this->getXFrom(), this->getYFrom());
+    this->pieceToCapture = Board::pieceOnSquare(this->getXTo(), this->getYTo());
+    this->pieceToMove->move(this->getXTo(), this->getYTo());
+}
+
+void Move::undo ()
+{
+    this->pieceToMove->move(this->getXFrom(), this->getYFrom());
+    Board::addPiece(pieceToCapture);
 }
