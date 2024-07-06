@@ -59,7 +59,7 @@ bool Pawn::isMoveLegal (int x, int y)
     {
         return true;
     }
-    else
+    else if (! this->isWhite())
     {
         if (y + 1 == this->getY() && this->getX() == x)
         {
