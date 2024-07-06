@@ -84,8 +84,8 @@ int Engine::recursiveMoveCalc (int depth, int maxDepth)
     {
         return getPositionEvaluation();
     }
-    int max = - 333333;
-    int min = - 333333;
+    int max = - 33333;
+    int min = - 33333;
     std::list<Move> moves = Board::getAllLegalMoves();
     for (Move move: moves)
     {
