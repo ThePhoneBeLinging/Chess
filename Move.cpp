@@ -45,7 +45,7 @@ void Move::setYTo (int yTo)
     Move::_yTo = yTo;
 }
 
-Move::Move (int xFrom, int xTo, int yFrom, int yTo)
+Move::Move (int xFrom, int yFrom, int xTo, int yTo)
 {
     this->_xFrom = xFrom;
     this->_xTo = xTo;
@@ -66,7 +66,7 @@ void Move::undo ()
     Board::addPiece(pieceToCapture);
 }
 
-Move *Move::getMovePointerFromMove ()
+Move *Move::getMovePointerFromMove () const
 {
     return new Move(this->getXFrom(), this->getYFrom(), this->getXTo(), this->getYTo());
 }
