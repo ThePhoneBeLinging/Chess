@@ -40,5 +40,7 @@ add_executable(Chess main.cpp
         UI.h
         UI.cpp
         Move.cpp
-        Move.h)
+        Move.h
+        Engine.cpp
+        Engine.h)
 target_link_libraries(${PROJECT_NAME} raylib)

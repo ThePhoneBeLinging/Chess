@@ -11,6 +11,7 @@ Pawn::Pawn (int x, int y, bool white) :
     char fileName[50];
     snprintf(fileName, 50, "../Resources/ChessPieces/%cPawn.png", white ? 'W' : 'B');
     this->setTexture(LoadTexture(fileName));
+    this->setValue(1);
 }
 
 bool Pawn::isMoveLegal (int x, int y)

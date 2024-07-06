@@ -11,6 +11,7 @@ Bishop::Bishop (int x, int y, bool white) :
     char fileName[50];
     snprintf(fileName, 50, "../Resources/ChessPieces/%cBishop.png", white ? 'W' : 'B');
     this->setTexture(LoadTexture(fileName));
+    this->setValue(3);
 }
 
 bool Bishop::isMoveLegal (int x, int y)

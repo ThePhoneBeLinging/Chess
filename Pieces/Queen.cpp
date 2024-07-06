@@ -16,6 +16,7 @@ Queen::Queen (int x, int y, bool white) :
     this->setTexture(LoadTexture(fileName));
     this->mRook = new Rook(this->getX(), this->getY(), this->isWhite());
     this->mBishop = new Bishop(this->getX(), this->getY(), this->isWhite());
+    this->setValue(9);
 }
 
 bool Queen::isMoveLegal (int x, int y)

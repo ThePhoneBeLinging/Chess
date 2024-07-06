@@ -31,12 +31,17 @@ public:
 
     void setHasMoved (bool hasMoved);
 
+    int getValue () const;
+
+    void setValue (int value);
+
 private:
     int _x;
     int _y;
     bool _white;
     Texture2D texture;
     bool hasMoved;
+    int value;
 };
 
 

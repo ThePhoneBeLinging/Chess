@@ -88,3 +88,13 @@ void Piece::setHasMoved (bool hasMoved)
 {
     Piece::hasMoved = hasMoved;
 }
+
+int Piece::getValue () const
+{
+    return value;
+}
+
+void Piece::setValue (int value)
+{
+    Piece::value = value;
+}

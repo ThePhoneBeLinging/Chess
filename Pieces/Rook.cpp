@@ -12,6 +12,7 @@ Rook::Rook (int x, int y, bool white) :
     char fileName[50];
     snprintf(fileName, 50, "../Resources/ChessPieces/%cRook.png", fileStart);
     this->setTexture(LoadTexture(fileName));
+    this->setValue(5);
 }
 
 bool Rook::isMoveLegal (int x, int y)
