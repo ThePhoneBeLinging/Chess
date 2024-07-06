@@ -52,6 +52,8 @@ bool Piece::isWhite () const
 
 bool Piece::isMoveLegal (int x, int y)
 {
+    if (Board::whiteTurn != this->isWhite())
+    { return false; }
     if (y > 8 || y < 1)
     { return false; }
     if (x > 8 || x < 1)
