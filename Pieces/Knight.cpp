@@ -28,3 +28,19 @@ bool Knight::isMoveLegal (int x, int y)
     return false;
 }
 
+std::list<Move> Knight::getLegalMoves ()
+{
+    std::list<Move> legalMoves;
+    for (int i = 1; i < 9; i ++)
+    {
+        for (int k = 1; k < 9; k ++)
+        {
+            if (isMoveLegal(i, k))
+            {
+                legalMoves.emplace_back(this->getX(), this->getY(), i, k);
+            }
+        }
+    }
+
+    return legalMoves;
+}

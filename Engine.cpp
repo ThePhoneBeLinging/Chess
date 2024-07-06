@@ -10,6 +10,7 @@
 int Engine::getPositionEvaluation ()
 {
     int totalEval = calculateMaterialDifference();
+    totalEval *= 10;
     return totalEval;
 }
 
@@ -32,7 +33,7 @@ int Engine::calculateMaterialDifference ()
 
 Move *Engine::getBestMove ()
 {
-    int maxDepth = 2;
+    int maxDepth = 3;
     int minRating = - 33333;
     int maxRating = - 33333;
     int indexOfMin = 0;

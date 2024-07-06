@@ -97,18 +97,11 @@ std::list<Move> Board::getAllLegalMoves ()
 void Board::updateAllLegalMoves ()
 {
     Board::_moves.clear();
-    for (int i = 1; i < 9; i ++)
+    for (const std::shared_ptr<Piece> &piece: Board::_pieces)
     {
-        for (int k = 1; k < 9; k ++)
+        for (Move move: piece->getLegalMoves())
         {
-            for (const std::shared_ptr<Piece> &piece: Board::_pieces)
-            {
-                if (piece->isMoveLegal(i, k))
-                {
-                    Move move = Move(piece->getX(), piece->getY(), i, k);
-                    Board::_moves.push_back(move);
-                }
-            }
+            Board::_moves.push_back(move);
         }
     }
     Board::amountOfCalls ++;

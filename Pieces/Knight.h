@@ -11,8 +11,11 @@
 class Knight : public Piece
 {
 public:
-    Knight(int x, int y, bool white);
-    bool isMoveLegal(int x, int y) override;
+    Knight (int x, int y, bool white);
+
+    bool isMoveLegal (int x, int y) override;
+
+    std::list<Move> getLegalMoves () override;
 };
 
 

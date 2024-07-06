@@ -15,6 +15,8 @@ public:
 
     bool isMoveLegal (int x, int y) override;
 
+    std::list<Move> getLegalMoves () override;
+
 protected:
     bool isMoveLegalRecursive (int x, int y);
 };

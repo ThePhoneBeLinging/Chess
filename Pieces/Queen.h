@@ -19,6 +19,8 @@ public:
 
     void move (int x, int y) override;
 
+    std::list<Move> getLegalMoves () override;
+
 private:
     Rook *mRook;
     Bishop *mBishop;

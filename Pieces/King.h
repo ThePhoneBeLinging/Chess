@@ -11,8 +11,11 @@
 class King : public Piece
 {
 public:
-    King(int x, int y, bool white);
-    bool isMoveLegal(int x, int y) override;
+    King (int x, int y, bool white);
+
+    bool isMoveLegal (int x, int y) override;
+
+    std::list<Move> getLegalMoves () override;
 };
 
 

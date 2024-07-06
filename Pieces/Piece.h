@@ -6,7 +6,10 @@
 #define CHESS_PIECE_H
 
 #include <cstdlib>
+#include <list>
 #include "raylib.h"
+
+class Move;
 
 class Piece
 {
@@ -35,6 +38,8 @@ public:
 
     void setValue (int value);
 
+    virtual std::list<Move> getLegalMoves () = 0;
+
 private:
     int _x;
     int _y;
@@ -44,5 +49,6 @@ private:
     int value;
 };
 
+#include "../Move.h"
 
 #endif //CHESS_PIECE_H
