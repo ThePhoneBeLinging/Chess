@@ -3,6 +3,7 @@
 //
 
 #include <cstdio>
+#include <iostream>
 #include "Knight.h"
 
 Knight::Knight (int x, int y, bool white) :
@@ -31,16 +32,22 @@ bool Knight::isMoveLegal (int x, int y)
 std::list<Move> Knight::getLegalMoves ()
 {
     std::list<Move> legalMoves;
-    for (int i = 1; i < 9; i ++)
+    std::list<int> possibleValues;
+    possibleValues.push_back(- 1);
+    possibleValues.push_back(- 2);
+    possibleValues.push_back(1);
+    possibleValues.push_back(2);
+    for (int x: possibleValues)
     {
-        for (int k = 1; k < 9; k ++)
+        for (int y: possibleValues)
         {
-            if (isMoveLegal(i, k))
+            if (isMoveLegal(this->getX() + x, this->getY() + y))
             {
-                legalMoves.emplace_back(this->getX(), this->getY(), i, k);
+                legalMoves.emplace_back(this->getX(), this->getY(), this->getX() + x, this->getY() + y);
             }
         }
     }
+
 
     return legalMoves;
 }
