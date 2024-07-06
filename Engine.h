@@ -6,12 +6,16 @@
 #define CHESS_ENGINE_H
 
 
+#include "Move.h"
+
 class Engine
 {
 public:
     static int calculateMaterialDifference ();
 
     static int getPositionEvaluation ();
+
+    static Move *getBestMove ();
 };
 
 

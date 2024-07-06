@@ -64,16 +64,6 @@ void UI::onClick (Vector2 position)
 {
     int xToGet = (int) position.x / tileSize;
     int yToGet = (int) position.y / tileSize;
-    /*
-    if (this->selectedPiece != nullptr && selectedPiece->isMoveLegal(xToGet, yToGet))
-    {
-        selectedPiece->move(xToGet, yToGet);
-    }
-    if (selectedPiece == nullptr)
-    { this->selectedPiece = Board::pieceOnSquare(xToGet, yToGet); }
-    else if (xToGet != selectedPiece->getX() && yToGet != selectedPiece->getY())
-    { selectedPiece = nullptr; }
-     */
     this->pieceOnHand = Board::pieceOnSquare(xToGet, yToGet);
 
 }

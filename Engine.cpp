@@ -29,3 +29,8 @@ int Engine::calculateMaterialDifference ()
     }
     return totalValue;
 }
+
+Move *Engine::getBestMove ()
+{
+    return nullptr;
+}
