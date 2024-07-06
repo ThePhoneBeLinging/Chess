@@ -99,6 +99,8 @@ void Board::updateAllLegalMoves ()
     Board::_moves.clear();
     for (const std::shared_ptr<Piece> &piece: Board::_pieces)
     {
+        if (piece->isWhite() != Board::whiteTurn)
+        { continue; }
         for (Move move: piece->getLegalMoves())
         {
             Board::_moves.push_back(move);
