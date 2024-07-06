@@ -34,6 +34,7 @@ public:
 private:
     static std::list<std::shared_ptr<Piece>> _pieces;
     static std::list<Move> _moves;
+    static int amountOfCalls;
 };
 
 

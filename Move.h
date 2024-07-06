@@ -42,6 +42,7 @@ private:
     int _xTo;
     int _yFrom;
     int _yTo;
+    int pieceToMoveHadMoved = false;
     std::shared_ptr<Piece> pieceToMove;
     std::shared_ptr<Piece> pieceToCapture;
 };

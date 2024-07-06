@@ -14,6 +14,7 @@
 std::list<std::shared_ptr<Piece>> Board::_pieces;
 std::list<Move> Board::_moves;
 bool Board::whiteTurn = true;
+int Board::amountOfCalls;
 
 std::list<std::shared_ptr<Piece>> Board::getPieces ()
 {
@@ -89,6 +90,7 @@ void Board::removePiece (std::shared_ptr<Piece> piece)
 
 std::list<Move> Board::getAllLegalMoves ()
 {
+    updateAllLegalMoves();
     return Board::_moves;
 }
 
@@ -109,17 +111,6 @@ void Board::updateAllLegalMoves ()
             }
         }
     }
-}
-
-std::list<Move> Board::getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece)
-{
-    std::list<Move> moves;
-    for (Move move: Board::_moves)
-    {
-        if (move.getXFrom() == piece->getX() && move.getYFrom() == piece->getY())
-        {
-            moves.push_back(move);
-        }
-    }
-    return moves;
+    Board::amountOfCalls ++;
+    std::cout << "Amount of updates of legal moves: " << Board::amountOfCalls << std::endl;
 }

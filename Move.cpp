@@ -56,6 +56,7 @@ Move::Move (int xFrom, int yFrom, int xTo, int yTo)
 void Move::execute ()
 {
     this->pieceToMove = Board::pieceOnSquare(this->getXFrom(), this->getYFrom());
+    this->pieceToMoveHadMoved = pieceToMove->isHasMoved();
     this->pieceToCapture = Board::pieceOnSquare(this->getXTo(), this->getYTo());
     this->pieceToMove->move(this->getXTo(), this->getYTo());
 }
@@ -64,6 +65,7 @@ void Move::undo ()
 {
     this->pieceToMove->move(this->getXFrom(), this->getYFrom());
     Board::addPiece(pieceToCapture);
+    this->pieceToMove->setHasMoved(this->pieceToMoveHadMoved);
 }
 
 Move *Move::getMovePointerFromMove () const

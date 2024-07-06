@@ -38,7 +38,6 @@ Move *Engine::getBestMove ()
     int indexOfMin = 0;
     int indexOfMax = 0;
     int k = 0;
-    Board::updateAllLegalMoves();
     for (Move move: Board::getAllLegalMoves())
     {
         move.execute();
@@ -57,7 +56,9 @@ Move *Engine::getBestMove ()
         move.undo();
     }
     int index = 0;
-    for (Move move: Board::getAllLegalMoves())
+
+    std::list<Move> moves = Board::getAllLegalMoves();
+    for (Move move: moves)
     {
         if (Board::whiteTurn)
         {
@@ -85,7 +86,8 @@ int Engine::recursiveMoveCalc (int depth, int maxDepth)
     }
     int max = - 333333;
     int min = - 333333;
-    for (Move move: Board::getAllLegalMoves())
+    std::list<Move> moves = Board::getAllLegalMoves();
+    for (Move move: moves)
     {
         move.execute();
         int moveValue = recursiveMoveCalc(depth + 1, maxDepth);
