@@ -108,7 +108,6 @@ void Board::updateAllLegalMoves ()
             }
         }
     }
-    std::cout << Board::_moves.size() << std::endl;
 }
 
 std::list<Move> Board::getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece)
