@@ -35,6 +35,8 @@ public:
 
     void undo ();
 
+    Move *getMovePointerFromMove ();
+
 private:
     int _xFrom;
     int _xTo;

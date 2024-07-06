@@ -34,7 +34,7 @@ Move *Engine::getBestMove ()
 {
     for (Move move: Board::getAllLegalMoves())
     {
-        return new Move(move.getXFrom(), move.getYFrom(), move.getXTo(), move.getYTo());
+        return move.getMovePointerFromMove();
     }
     return nullptr;
 }

@@ -65,3 +65,8 @@ void Move::undo ()
     this->pieceToMove->move(this->getXFrom(), this->getYFrom());
     Board::addPiece(pieceToCapture);
 }
+
+Move *Move::getMovePointerFromMove ()
+{
+    return new Move(this->getXFrom(), this->getYFrom(), this->getXTo(), this->getYTo());
+}
