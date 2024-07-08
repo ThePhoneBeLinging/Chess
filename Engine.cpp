@@ -35,8 +35,8 @@ int Engine::calculateMaterialDifference ()
 Move *Engine::getBestMove ()
 {
     int maxDepth = 2;
-    int minRating = - 33333;
-    int maxRating = - 33333;
+    int minRating = INT32_MAX;
+    int maxRating = INT32_MIN;
     int indexOfMin = 0;
     int indexOfMax = 0;
     int k = 0;
@@ -44,12 +44,12 @@ Move *Engine::getBestMove ()
     {
         move.execute();
         int rating = recursiveMoveCalc(0, maxDepth);
-        if (rating > maxRating || maxRating == - 33333)
+        if (rating > maxRating)
         {
             maxRating = rating;
             indexOfMax = k;
         }
-        if (minRating > rating || minRating == - 33333)
+        if (minRating > rating)
         {
             minRating = rating;
             indexOfMin = k;
@@ -86,18 +86,18 @@ int Engine::recursiveMoveCalc (int depth, int maxDepth)
     {
         return getPositionEvaluation();
     }
-    int max = - 33333;
-    int min = - 33333;
+    int min = INT32_MAX;
+    int max = INT32_MIN;
     std::list<Move> moves = Board::getAllLegalMoves();
     for (Move move: moves)
     {
         move.execute();
         int moveValue = recursiveMoveCalc(depth + 1, maxDepth);
-        if (moveValue > max || max == - 33333)
+        if (moveValue > max)
         {
             max = moveValue;
         }
-        if (moveValue < min || min == - 33333)
+        if (moveValue < min)
         {
             min = moveValue;
         }
