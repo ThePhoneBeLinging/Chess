@@ -40,7 +40,8 @@ Move *Engine::getBestMove ()
     int indexOfMin = 0;
     int indexOfMax = 0;
     int k = 0;
-    for (Move move: Board::getAllLegalMoves())
+    std::list<Move> moves = Board::getAllLegalMoves();
+    for (Move move: moves)
     {
         move.execute();
         int rating = recursiveMoveCalc(0, maxDepth);
@@ -58,7 +59,7 @@ Move *Engine::getBestMove ()
         move.undo();
     }
     int index = 0;
-    for (Move move: Board::getAllLegalMoves())
+    for (Move move: moves)
     {
         if (Board::whiteTurn)
         {
