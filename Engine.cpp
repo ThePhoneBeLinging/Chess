@@ -37,9 +37,8 @@ Move *Engine::getBestMove ()
     int maxDepth = 2;
     int minRating = INT32_MAX;
     int maxRating = INT32_MIN;
-    int indexOfMin = 0;
-    int indexOfMax = 0;
-    int k = 0;
+    std::list<Move> minMoves;
+    std::list<Move> maxMoves;
     std::list<Move> moves = Board::getAllLegalMoves();
     for (Move move: moves)
     {
@@ -48,35 +47,45 @@ Move *Engine::getBestMove ()
         if (rating > maxRating)
         {
             maxRating = rating;
-            indexOfMax = k;
+            maxMoves.clear();
         }
         if (minRating > rating)
         {
             minRating = rating;
-            indexOfMin = k;
+            minMoves.clear();
         }
-        k ++;
+        if (rating == maxRating)
+        {
+            maxMoves.push_back(move);
+        }
+        if (rating == minRating)
+        {
+            minMoves.push_back(move);
+        }
         move.undo();
     }
-    int index = 0;
-    for (Move move: moves)
+    if (maxMoves.empty() || minMoves.empty())
     {
-        if (Board::whiteTurn)
-        {
-            if (index == indexOfMax)
-            { return move.getMovePointerFromMove(); }
-        }
-        else
-        {
-            if (index == indexOfMin)
-            {
-                return move.getMovePointerFromMove();
-            }
-        }
-        index ++;
+        return nullptr;
     }
-
-    return nullptr;
+    if (Board::whiteTurn)
+    {
+        auto maxIterator = maxMoves.begin();
+        for (int i = 0; i < rand() % maxMoves.size(); i ++)
+        {
+            maxIterator ++;
+        }
+        return maxIterator->getMovePointerFromMove();
+    }
+    else
+    {
+        auto minIterator = minMoves.begin();
+        for (int i = 0; i < rand() % minMoves.size(); i ++)
+        {
+            minIterator ++;
+        }
+        return minIterator->getMovePointerFromMove();
+    }
 }
 
 int Engine::recursiveMoveCalc (int depth, int maxDepth)
