@@ -107,3 +107,9 @@ Move *Move::getMovePointerFromMove () const
 {
     return new Move(this->getXFrom(), this->getYFrom(), this->getXTo(), this->getYTo());
 }
+
+bool Move::equals (Move move)
+{
+    return this->getXFrom() == move.getXFrom() && this->getYFrom() == move.getYFrom() &&
+           this->getXTo() == move.getXTo() && this->getYTo() == move.getYTo();
+}

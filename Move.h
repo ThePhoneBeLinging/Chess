@@ -37,6 +37,8 @@ public:
 
     Move *getMovePointerFromMove () const;
 
+    bool equals (Move move);
+
 private:
     int _xFrom;
     int _xTo;

@@ -74,10 +74,14 @@ void UI::onRelease (Vector2 position)
     int yToGet = (int) position.y / tileSize;
     if (pieceOnHand != nullptr)
     {
-        if (pieceOnHand->isMoveLegal(xToGet, yToGet))
+        Move move = Move(pieceOnHand->getX(), pieceOnHand->getY(), xToGet, yToGet);
+        for (Move legalMove: Board::getAllLegalMoves())
         {
-            Move move = Move(pieceOnHand->getX(), pieceOnHand->getY(), xToGet, yToGet);
-            move.execute();
+            if (move.equals(legalMove))
+            {
+                move.execute();
+                break;
+            }
         }
     }
     pieceOnHand = nullptr;
