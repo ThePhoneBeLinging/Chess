@@ -34,7 +34,7 @@ int Engine::calculateMaterialDifference ()
 
 Move *Engine::getBestMove ()
 {
-    int maxDepth = 3;
+    int maxDepth = 2;
     int minRating = INT32_MAX;
     int maxRating = INT32_MIN;
     int indexOfMin = 0;
