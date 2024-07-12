@@ -82,6 +82,7 @@ void Move::execute ()
                 this->_rookToX = this->getXTo() + 1;
                 this->rookInvolvedInCastle->move(this->_rookToX, pieceToMove->getY());
             }
+            Board::whiteTurn = ! Board::whiteTurn;
         }
     }
 
@@ -98,6 +99,7 @@ void Move::undo ()
     if (this->rookInvolvedInCastle != nullptr)
     {
         rookInvolvedInCastle->move(this->_rookFromX, this->getYFrom());
+        Board::whiteTurn = ! Board::whiteTurn;
     }
 }
 
