@@ -76,7 +76,8 @@ void UI::onRelease (Vector2 position)
     {
         if (pieceOnHand->isMoveLegal(xToGet, yToGet))
         {
-            pieceOnHand->move(xToGet, yToGet);
+            Move move = Move(pieceOnHand->getX(), pieceOnHand->getY(), xToGet, yToGet);
+            move.execute();
         }
     }
     pieceOnHand = nullptr;
