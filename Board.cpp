@@ -103,7 +103,32 @@ void Board::updateAllLegalMoves ()
         { continue; }
         for (Move move: piece->getLegalMoves())
         {
-            Board::_moves.push_back(move);
+            move.execute();
+            bool legalMove = true;
+            for (auto king: Board::getPieces())
+            {
+                if (king->isWhite() == Board::whiteTurn)
+                { continue; }
+                if (king->getValue() == 0)
+                {
+                    for (auto otherPiece: Board::getPieces())
+                    {
+                        if (otherPiece->isWhite() != Board::whiteTurn)
+                        { continue; }
+                        if (otherPiece->isMoveLegal(king->getX(), king->getY()))
+                        {
+                            legalMove = false;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            move.undo();
+            if (legalMove)
+            {
+                Board::_moves.push_back(move);
+            }
         }
     }
 }

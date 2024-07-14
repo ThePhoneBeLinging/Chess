@@ -24,6 +24,41 @@ bool King::isMoveLegal (int x, int y)
     int deltaX = std::abs(x - this->getX());
     int deltaY = std::abs(y - this->getY());
 
+    //Castle check
+    if (! this->isHasMoved())
+    {
+        int rookX = 0;
+        bool kingSideCastle = false;
+        if (x == this->getX() - 2)
+        {
+            rookX = 1;
+            kingSideCastle = false;
+        }
+        else if (x == this->getX() + 2)
+        {
+            rookX = 8;
+            kingSideCastle = true;
+        }
+        std::shared_ptr<Piece> rook = Board::pieceOnSquare(rookX, y);
+        if (rook != nullptr)
+        {
+            if (kingSideCastle)
+            {
+                if (rook->isMoveLegal(this->getX() + 1, this->getY()))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (rook->isMoveLegal(this->getX() - 1, this->getY()))
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
     if (deltaX > 1 || deltaY > 1)
     { return false; }
     return Piece::isMoveLegal(x, y);
@@ -32,7 +67,7 @@ bool King::isMoveLegal (int x, int y)
 std::list<Move> King::getLegalMoves ()
 {
     std::list<Move> legalMoves;
-    for (int i = - 1; i < 2; i ++)
+    for (int i = - 2; i < 3; i ++)
     {
         for (int k = - 1; k < 2; k ++)
         {
@@ -45,3 +80,4 @@ std::list<Move> King::getLegalMoves ()
 
     return legalMoves;
 }
+

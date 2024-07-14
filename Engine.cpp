@@ -35,49 +35,57 @@ int Engine::calculateMaterialDifference ()
 Move *Engine::getBestMove ()
 {
     int maxDepth = 2;
-    int minRating = - 33333;
-    int maxRating = - 33333;
-    int indexOfMin = 0;
-    int indexOfMax = 0;
-    int k = 0;
-    for (Move move: Board::getAllLegalMoves())
-    {
-        move.execute();
-        int rating = recursiveMoveCalc(0, maxDepth);
-        if (rating > maxRating || maxRating == - 33333)
-        {
-            maxRating = rating;
-            indexOfMax = k;
-        }
-        if (minRating > rating || minRating == - 33333)
-        {
-            minRating = rating;
-            indexOfMin = k;
-        }
-        k ++;
-        move.undo();
-    }
-    int index = 0;
-
+    int minRating = INT32_MAX;
+    int maxRating = INT32_MIN;
+    std::list<Move> minMoves;
+    std::list<Move> maxMoves;
     std::list<Move> moves = Board::getAllLegalMoves();
     for (Move move: moves)
     {
-        if (Board::whiteTurn)
+        move.execute();
+        int rating = recursiveMoveCalc(0, maxDepth);
+        if (rating > maxRating)
         {
-            if (index == indexOfMax)
-            { return move.getMovePointerFromMove(); }
+            maxRating = rating;
+            maxMoves.clear();
         }
-        else
+        if (minRating > rating)
         {
-            if (index == indexOfMin)
-            {
-                return move.getMovePointerFromMove();
-            }
+            minRating = rating;
+            minMoves.clear();
         }
-        index ++;
+        if (rating == maxRating)
+        {
+            maxMoves.push_back(move);
+        }
+        if (rating == minRating)
+        {
+            minMoves.push_back(move);
+        }
+        move.undo();
     }
-
-    return nullptr;
+    if (maxMoves.empty() || minMoves.empty())
+    {
+        return nullptr;
+    }
+    if (Board::whiteTurn)
+    {
+        auto maxIterator = maxMoves.begin();
+        for (int i = 0; i < rand() % maxMoves.size(); i ++)
+        {
+            maxIterator ++;
+        }
+        return maxIterator->getMovePointerFromMove();
+    }
+    else
+    {
+        auto minIterator = minMoves.begin();
+        for (int i = 0; i < rand() % minMoves.size(); i ++)
+        {
+            minIterator ++;
+        }
+        return minIterator->getMovePointerFromMove();
+    }
 }
 
 int Engine::recursiveMoveCalc (int depth, int maxDepth)
@@ -86,18 +94,17 @@ int Engine::recursiveMoveCalc (int depth, int maxDepth)
     {
         return getPositionEvaluation();
     }
-    int max = - 33333;
-    int min = - 33333;
-    std::list<Move> moves = Board::getAllLegalMoves();
-    for (Move move: moves)
+    int min = INT32_MAX;
+    int max = INT32_MIN;
+    for (Move move: Board::getAllLegalMoves())
     {
         move.execute();
         int moveValue = recursiveMoveCalc(depth + 1, maxDepth);
-        if (moveValue > max || max == - 33333)
+        if (moveValue > max)
         {
             max = moveValue;
         }
-        if (moveValue < min || min == - 33333)
+        if (moveValue < min)
         {
             min = moveValue;
         }

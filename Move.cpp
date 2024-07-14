@@ -57,6 +57,36 @@ void Move::execute ()
 {
     this->pieceToMove = Board::pieceOnSquare(this->getXFrom(), this->getYFrom());
     this->pieceToMoveHadMoved = pieceToMove->isHasMoved();
+
+    if (pieceToMove->getValue() == 0)
+    {
+        int deltaX = pieceToMove->getX() - this->getXTo();
+        if (std::abs(deltaX) == 2)
+        {
+            bool kingSideCastle = false;
+            if (deltaX < 0)
+            {
+                kingSideCastle = true;
+            }
+            if (kingSideCastle)
+            {
+                this->rookInvolvedInCastle = Board::pieceOnSquare(8, this->getYFrom());
+                this->_rookFromX = 8;
+                this->_rookToX = this->getXTo() - 1;
+                rookInvolvedInCastle->move(this->_rookToX, pieceToMove->getY());
+            }
+            else
+            {
+                this->rookInvolvedInCastle = Board::pieceOnSquare(1, this->getYFrom());
+                this->_rookFromX = 1;
+                this->_rookToX = this->getXTo() + 1;
+                this->rookInvolvedInCastle->move(this->_rookToX, pieceToMove->getY());
+            }
+            Board::whiteTurn = ! Board::whiteTurn;
+        }
+    }
+
+
     this->pieceToCapture = Board::pieceOnSquare(this->getXTo(), this->getYTo());
     this->pieceToMove->move(this->getXTo(), this->getYTo());
 }
@@ -66,9 +96,20 @@ void Move::undo ()
     this->pieceToMove->move(this->getXFrom(), this->getYFrom());
     Board::addPiece(pieceToCapture);
     this->pieceToMove->setHasMoved(this->pieceToMoveHadMoved);
+    if (this->rookInvolvedInCastle != nullptr)
+    {
+        rookInvolvedInCastle->move(this->_rookFromX, this->getYFrom());
+        Board::whiteTurn = ! Board::whiteTurn;
+    }
 }
 
 Move *Move::getMovePointerFromMove () const
 {
     return new Move(this->getXFrom(), this->getYFrom(), this->getXTo(), this->getYTo());
+}
+
+bool Move::equals (Move move)
+{
+    return this->getXFrom() == move.getXFrom() && this->getYFrom() == move.getYFrom() &&
+           this->getXTo() == move.getXTo() && this->getYTo() == move.getYTo();
 }

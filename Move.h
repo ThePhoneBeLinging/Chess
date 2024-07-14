@@ -37,14 +37,19 @@ public:
 
     Move *getMovePointerFromMove () const;
 
+    bool equals (Move move);
+
 private:
     int _xFrom;
     int _xTo;
     int _yFrom;
     int _yTo;
+    int _rookFromX;
+    int _rookToX;
     int pieceToMoveHadMoved = false;
     std::shared_ptr<Piece> pieceToMove;
     std::shared_ptr<Piece> pieceToCapture;
+    std::shared_ptr<Piece> rookInvolvedInCastle;
 };
 
 
