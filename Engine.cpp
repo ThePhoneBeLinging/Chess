@@ -96,7 +96,8 @@ int Engine::recursiveMoveCalc (int depth, int maxDepth)
     }
     int min = INT32_MAX;
     int max = INT32_MIN;
-    for (Move move: Board::getAllLegalMoves())
+    std::list<Move> legalMoves = Board::getAllLegalMoves();
+    for (Move move: legalMoves)
     {
         move.execute();
         int moveValue = recursiveMoveCalc(depth + 1, maxDepth);
