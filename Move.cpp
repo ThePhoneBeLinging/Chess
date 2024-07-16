@@ -60,7 +60,6 @@ Move::Move (int xFrom, int yFrom, int xTo, int yTo)
 
 void Move::execute ()
 {
-
     if (pieceToMove->getValue() == 0)
     {
         int deltaX = pieceToMove->getX() - this->getXTo();

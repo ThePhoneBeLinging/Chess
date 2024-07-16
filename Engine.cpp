@@ -70,8 +70,9 @@ Move *Engine::getBestMove ()
     }
     if (Board::whiteTurn)
     {
+        int value = rand() % maxMoves.size();
         auto maxIterator = maxMoves.begin();
-        for (int i = 0; i < random() % maxMoves.size(); i ++)
+        for (int i = 0; i < value; i ++)
         {
             maxIterator ++;
         }
@@ -80,7 +81,8 @@ Move *Engine::getBestMove ()
     else
     {
         auto minIterator = minMoves.begin();
-        for (int i = 0; i < random() % minMoves.size(); i ++)
+        int value = rand() % minMoves.size();
+        for (int i = 0; i < value; i ++)
         {
             minIterator ++;
         }
@@ -97,6 +99,24 @@ int Engine::recursiveMoveCalc (int depth, int maxDepth)
     int min = INT32_MAX;
     int max = INT32_MIN;
     std::list<Move> legalMoves = Board::getAllLegalMoves();
+    if (legalMoves.empty())
+    {
+        Board::whiteTurn = ! Board::whiteTurn;
+        if (Board::isInCheck())
+        {
+            Board::whiteTurn = ! Board::whiteTurn;
+            if (Board::whiteTurn)
+            {
+                return INT32_MIN;
+            }
+            else
+            {
+                return INT32_MAX;
+            }
+        }
+        Board::whiteTurn = ! Board::whiteTurn;
+        return 0;
+    }
     for (Move move: legalMoves)
     {
         move.execute();
