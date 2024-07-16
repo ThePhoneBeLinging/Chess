@@ -6,7 +6,7 @@
 #define CHESS_V1ENGINE_H
 
 
-#include "Move.h"
+#include "../Move.h"
 
 class V1Engine
 {

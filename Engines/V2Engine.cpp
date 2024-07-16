@@ -4,18 +4,18 @@
 
 #include <memory>
 #include <iostream>
-#include "V1Engine.h"
-#include "Pieces/Piece.h"
-#include "Board.h"
+#include "V2Engine.h"
+#include "../Pieces/Piece.h"
+#include "../Board.h"
 
-int V1Engine::getPositionEvaluation ()
+int V2Engine::getPositionEvaluation ()
 {
     int totalEval = calculateMaterialDifference();
     totalEval *= 10;
     return totalEval;
 }
 
-int V1Engine::calculateMaterialDifference ()
+int V2Engine::calculateMaterialDifference ()
 {
     int totalValue = 0;
     for (std::shared_ptr<Piece> piece: Board::getPieces())
@@ -32,14 +32,15 @@ int V1Engine::calculateMaterialDifference ()
     return totalValue;
 }
 
-Move *V1Engine::getBestMove ()
+Move *V2Engine::getBestMove ()
 {
-    int maxDepth = 1;
+    int maxDepth = 0;
     int minRating = INT32_MAX;
     int maxRating = INT32_MIN;
     std::list<Move> minMoves;
     std::list<Move> maxMoves;
     std::list<Move> moves = Board::getAllLegalMoves();
+    return moves.begin()->getMovePointerFromMove();
     for (Move move: moves)
     {
         move.execute();
@@ -90,7 +91,7 @@ Move *V1Engine::getBestMove ()
     }
 }
 
-int V1Engine::recursiveMoveCalc (int depth, int maxDepth)
+int V2Engine::recursiveMoveCalc (int depth, int maxDepth)
 {
     if (depth == maxDepth)
     {

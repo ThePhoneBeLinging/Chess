@@ -91,7 +91,7 @@ void Move::execute ()
     }
     if (pieceToMove->getValue() == 1)
     {
-        if (pieceToMove->isWhite() && this->_xTo == 8)
+        if (this->_yTo == 8 || this->_yTo == 1)
         {
             this->queenCreated = std::make_shared<Queen>(this->getXTo(), this->getYTo(), pieceToMove->isWhite());
             Board::removePiece(pieceToMove);

@@ -5,8 +5,9 @@
 #include "Board.h"
 #include "raylib.h"
 #include "UI.h"
-#include "V1Engine.h"
+#include "Engines/V1Engine.h"
 #include "EngineTester.h"
+#include "Engines/V2Engine.h"
 
 int main ()
 {
@@ -14,8 +15,8 @@ int main ()
     srand(time(nullptr));
     InitWindow(1200, 800, "Dean");
     SetTargetFPS(60);
-    TextureManager::loadTextures();
     UI *ui = new UI();
+    TextureManager::loadTextures();
     Board::startGame();
     int winner = 5;
     if (toTestEngines)
@@ -49,7 +50,7 @@ int main ()
         if (! Board::whiteTurn)
         {
             auto t1 = std::chrono::high_resolution_clock::now();
-            Move *bestMove = V1Engine::getBestMove();
+            Move *bestMove = V2Engine::getBestMove();
             auto t2 = std::chrono::high_resolution_clock::now();
             int amountOfMoves = Board::getAllLegalMoves().size();
             auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
