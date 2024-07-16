@@ -16,7 +16,10 @@ public:
 
     void draw ();
 
-    void drawForEngineTester (std::string engine1, std::string engine2, int winsEngine1, int winsEngine2, int draws);
+    void
+    drawForEngineTester (std::string engine1, std::string engine2, int winsEngine1, int winsEngine2, int draws,
+                         int avgTime1,
+                         int avgTime2);
 
     static int tileSize;
 private:

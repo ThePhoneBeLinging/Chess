@@ -83,10 +83,14 @@ void UI::onRelease (Vector2 position)
     pieceOnHand = nullptr;
 }
 
-void UI::drawForEngineTester (std::string engine1, std::string engine2, int winsEngine1, int winsEngine2, int draws)
+void UI::drawForEngineTester (std::string engine1, std::string engine2, int winsEngine1, int winsEngine2, int draws,
+                              int avgTime1, int avgTime2)
 {
     UI::draw();
-    DrawText(TextFormat("%s: %d", engine1.c_str(), winsEngine1), 800, 200, 40, WHITE);
-    DrawText(TextFormat("Draws: %d", draws), 800, 250, 40, WHITE);
-    DrawText(TextFormat("%s: %d", engine2.c_str(), winsEngine2), 800, 300, 40, WHITE);
+    DrawText(TextFormat("%s: %d \t %s: %d", engine1.c_str(), winsEngine1, engine2.c_str(), winsEngine2), 800, 200, 40,
+             WHITE);
+    DrawText(TextFormat("Draws: %d", draws), 800, 300, 40, WHITE);
+    DrawText(TextFormat("ms per move: \n\n\n%s: %d \t%s: %d", engine1.c_str(), avgTime1, engine2.c_str(),
+                        avgTime2),
+             800, 400, 40, WHITE);
 }

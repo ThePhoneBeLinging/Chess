@@ -23,7 +23,10 @@ private:
     int draws;
     int engine1Wins;
     int engine2Wins;
-
+    int avgTimeUsed1;
+    int avgTimeUsed2;
+    int movesMade1;
+    int movesMade2;
 };
 
 
