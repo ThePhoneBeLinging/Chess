@@ -5,6 +5,7 @@
 #include "Move.h"
 #include "Board.h"
 #include "UI.h"
+#include "Pieces/Queen.h"
 
 int Move::getXFrom () const
 {
@@ -56,6 +57,7 @@ Move::Move (int xFrom, int yFrom, int xTo, int yTo)
     this->pieceToMoveHadMoved = pieceToMove->isHasMoved();
     this->pieceToCapture = Board::pieceOnSquare(this->getXTo(), this->getYTo());
     this->rookInvolvedInCastle = nullptr;
+    this->queenCreated = nullptr;
 }
 
 void Move::execute ()
@@ -87,11 +89,25 @@ void Move::execute ()
             Board::whiteTurn = ! Board::whiteTurn;
         }
     }
+    if (pieceToMove->getValue() == 1)
+    {
+        if (pieceToMove->isWhite() && this->_xTo == 8)
+        {
+            this->queenCreated = std::make_shared<Queen>(this->getXTo(), this->getYTo(), pieceToMove->isWhite());
+            Board::removePiece(pieceToMove);
+            Board::addPiece(queenCreated);
+        }
+    }
     this->pieceToMove->move(this->getXTo(), this->getYTo());
 }
 
 void Move::undo ()
 {
+    if (this->queenCreated != nullptr)
+    {
+        Board::removePiece(queenCreated);
+        Board::addPiece(pieceToMove);
+    }
     this->pieceToMove->move(this->getXFrom(), this->getYFrom());
     Board::addPiece(pieceToCapture);
     this->pieceToMove->setHasMoved(this->pieceToMoveHadMoved);

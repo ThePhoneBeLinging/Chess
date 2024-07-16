@@ -50,6 +50,7 @@ private:
     std::shared_ptr<Piece> pieceToMove;
     std::shared_ptr<Piece> pieceToCapture;
     std::shared_ptr<Piece> rookInvolvedInCastle;
+    std::shared_ptr<Piece> queenCreated;
 };
 
 
