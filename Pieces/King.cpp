@@ -10,10 +10,10 @@
 King::King (int x, int y, bool white) :
         Piece(x, y, white)
 {
-    const char fileStart = white ? 'W' : 'B';
-    char fileName[50];
-    snprintf(fileName, 50, "../Resources/ChessPieces/%cKing.png", fileStart);
-    this->setTexture(LoadTexture(fileName));
+    if (white)
+    { this->setTexture(TextureManager::wKing); }
+    else
+    { this->setTexture(TextureManager::bKing); }
     this->setValue(0);
 }
 

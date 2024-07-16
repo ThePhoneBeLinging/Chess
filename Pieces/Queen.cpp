@@ -10,10 +10,10 @@
 Queen::Queen (int x, int y, bool white) :
         Piece(x, y, white)
 {
-    const char fileStart = white ? 'W' : 'B';
-    char fileName[50];
-    snprintf(fileName, 50, "../Resources/ChessPieces/%cQueen.png", fileStart);
-    this->setTexture(LoadTexture(fileName));
+    if (white)
+    { this->setTexture(TextureManager::wQueen); }
+    else
+    { this->setTexture(TextureManager::bQueen); }
     this->mRook = new Rook(this->getX(), this->getY(), this->isWhite());
     this->mBishop = new Bishop(this->getX(), this->getY(), this->isWhite());
     this->setValue(9);

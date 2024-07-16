@@ -9,9 +9,10 @@
 Knight::Knight (int x, int y, bool white) :
         Piece(x, y, white)
 {
-    char fileName[50];
-    snprintf(fileName, 50, "../Resources/ChessPieces/%cKnight.png", white ? 'W' : 'B');
-    this->setTexture(LoadTexture(fileName));
+    if (white)
+    { this->setTexture(TextureManager::wKnight); }
+    else
+    { this->setTexture(TextureManager::bKnight); }
     this->setValue(3);
 }
 

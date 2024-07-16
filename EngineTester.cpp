@@ -55,7 +55,7 @@ void EngineTester::testEngines ()
                     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
                     int timePerLegalMove = time.count();
                     totalTime += timePerLegalMove;
-                    if (amountOfMoves >= 50)
+                    if (amountOfMoves >= 40)
                     { this->avgTimeUsed1 = totalTime / this->movesMade1; }
                 }
                 else
@@ -68,7 +68,7 @@ void EngineTester::testEngines ()
                     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
                     int timePerLegalMove = time.count();
                     totalTime += timePerLegalMove;
-                    if (amountOfMoves >= 50)
+                    if (amountOfMoves > 40)
                     { this->avgTimeUsed2 = totalTime / this->movesMade2; }
                 }
 

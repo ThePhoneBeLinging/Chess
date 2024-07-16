@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <list>
 #include "raylib.h"
+#include "../TextureManager.h"
 
 class Move;
 

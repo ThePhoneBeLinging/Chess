@@ -14,6 +14,7 @@ int main ()
     srand(time(nullptr));
     InitWindow(1200, 800, "Dean");
     SetTargetFPS(60);
+    TextureManager::loadTextures();
     UI *ui = new UI();
     Board::startGame();
     int winner = 5;

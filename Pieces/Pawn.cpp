@@ -8,9 +8,10 @@
 Pawn::Pawn (int x, int y, bool white) :
         Piece(x, y, white)
 {
-    char fileName[50];
-    snprintf(fileName, 50, "../Resources/ChessPieces/%cPawn.png", white ? 'W' : 'B');
-    this->setTexture(LoadTexture(fileName));
+    if (white)
+    { this->setTexture(TextureManager::wPawn); }
+    else
+    { this->setTexture(TextureManager::bPawn); }
     this->setValue(1);
 }
 

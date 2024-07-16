@@ -45,5 +45,7 @@ add_executable(Chess main.cpp
         V1Engine.h
         EngineTester.h
         EngineTester.cpp
+        TextureManager.h
+        TextureManager.cpp
 )
 target_link_libraries(${PROJECT_NAME} raylib)

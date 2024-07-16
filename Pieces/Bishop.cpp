@@ -8,9 +8,10 @@
 Bishop::Bishop (int x, int y, bool white) :
         Piece(x, y, white)
 {
-    char fileName[50];
-    snprintf(fileName, 50, "../Resources/ChessPieces/%cBishop.png", white ? 'W' : 'B');
-    this->setTexture(LoadTexture(fileName));
+    if (white)
+    { this->setTexture(TextureManager::wBishop); }
+    else
+    { this->setTexture(TextureManager::bBishop); }
     this->setValue(3);
 }
 

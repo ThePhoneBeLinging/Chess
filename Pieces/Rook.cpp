@@ -8,10 +8,10 @@
 Rook::Rook (int x, int y, bool white) :
         Piece(x, y, white)
 {
-    const char fileStart = white ? 'W' : 'B';
-    char fileName[50];
-    snprintf(fileName, 50, "../Resources/ChessPieces/%cRook.png", fileStart);
-    this->setTexture(LoadTexture(fileName));
+    if (white)
+    { this->setTexture(TextureManager::wRook); }
+    else
+    { this->setTexture(TextureManager::bRook); }
     this->setValue(5);
 }
 
