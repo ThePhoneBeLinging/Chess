@@ -3,7 +3,6 @@
 //
 
 #include "UI.h"
-#include "Engine.h"
 
 int UI::tileSize = 75;
 
@@ -40,7 +39,6 @@ void UI::draw ()
             DrawRectangle(k * tileSize, i * tileSize, tileSize, tileSize, color);
         }
     }
-    char evaluationText[25];
 
     for (std::shared_ptr<Piece> piece: Board::getPieces())
     {
@@ -83,4 +81,12 @@ void UI::onRelease (Vector2 position)
         }
     }
     pieceOnHand = nullptr;
+}
+
+void UI::drawForEngineTester (std::string engine1, std::string engine2, int winsEngine1, int winsEngine2, int draws)
+{
+    UI::draw();
+    DrawText(TextFormat("%s: %d", engine1.c_str(), winsEngine1), 800, 200, 40, WHITE);
+    DrawText(TextFormat("Draws: %d", draws), 800, 250, 40, WHITE);
+    DrawText(TextFormat("%s: %d", engine2.c_str(), winsEngine2), 800, 300, 40, WHITE);
 }

@@ -44,6 +44,7 @@ std::shared_ptr<Piece> Board::pieceOnSquare (int x, int y)
 
 void Board::startGame ()
 {
+    Board::_pieces.clear();
     for (int i = 8; i > 0; i --)
     {
         for (int k = 8; k > 0; k --)

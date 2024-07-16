@@ -4,18 +4,18 @@
 
 #include <memory>
 #include <iostream>
-#include "Engine.h"
+#include "V1Engine.h"
 #include "Pieces/Piece.h"
 #include "Board.h"
 
-int Engine::getPositionEvaluation ()
+int V1Engine::getPositionEvaluation ()
 {
     int totalEval = calculateMaterialDifference();
     totalEval *= 10;
     return totalEval;
 }
 
-int Engine::calculateMaterialDifference ()
+int V1Engine::calculateMaterialDifference ()
 {
     int totalValue = 0;
     for (std::shared_ptr<Piece> piece: Board::getPieces())
@@ -32,9 +32,9 @@ int Engine::calculateMaterialDifference ()
     return totalValue;
 }
 
-Move *Engine::getBestMove ()
+Move *V1Engine::getBestMove ()
 {
-    int maxDepth = 2;
+    int maxDepth = 1;
     int minRating = INT32_MAX;
     int maxRating = INT32_MIN;
     std::list<Move> minMoves;
@@ -90,7 +90,7 @@ Move *Engine::getBestMove ()
     }
 }
 
-int Engine::recursiveMoveCalc (int depth, int maxDepth)
+int V1Engine::recursiveMoveCalc (int depth, int maxDepth)
 {
     if (depth == maxDepth)
     {

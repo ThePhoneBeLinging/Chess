@@ -5,18 +5,28 @@
 #include "Board.h"
 #include "raylib.h"
 #include "UI.h"
-#include "Engine.h"
+#include "V1Engine.h"
+#include "EngineTester.h"
 
 int main ()
 {
+    bool toTestEngines = true;
     srand(time(nullptr));
     InitWindow(1200, 800, "Dean");
     SetTargetFPS(60);
     UI *ui = new UI();
     Board::startGame();
-    int winner = 0;
+    int winner = 5;
+    if (toTestEngines)
+    {
+        auto engineTester = new EngineTester();
+        engineTester->testEngines();
+        std::cout << engineTester->getDraws();
+    }
     while (! WindowShouldClose())
     {
+        if (toTestEngines)
+        { break; }
         ui->draw();
         if (Board::getAllLegalMoves().empty())
         {
@@ -32,21 +42,21 @@ int main ()
                     winner = - 1;
                 }
             }
+            Board::whiteTurn = ! Board::whiteTurn;
             break;
         }
-        auto t1 = std::chrono::high_resolution_clock::now();
-        Move *bestMove = Engine::getBestMove();
-        auto t2 = std::chrono::high_resolution_clock::now();
-        int amountOfMoves = Board::getAllLegalMoves().size();
-        auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-        std::cout << "Time per move: " << time.count() / amountOfMoves << std::endl;
-        std::cout << "Number of moves: " << amountOfMoves << std::endl;
-        std::cout << "Time to search: " << time.count() << std::endl;
-        std::cout << std::endl << std::endl << std::endl;
-        bestMove->execute();
         if (! Board::whiteTurn)
         {
-
+            auto t1 = std::chrono::high_resolution_clock::now();
+            Move *bestMove = V1Engine::getBestMove();
+            auto t2 = std::chrono::high_resolution_clock::now();
+            int amountOfMoves = Board::getAllLegalMoves().size();
+            auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+            std::cout << "Time per move: " << time.count() / amountOfMoves << std::endl;
+            std::cout << "Number of moves: " << amountOfMoves << std::endl;
+            std::cout << "Time to search: " << time.count() << std::endl;
+            std::cout << std::endl << std::endl << std::endl;
+            bestMove->execute();
         }
     }
     CloseWindow();

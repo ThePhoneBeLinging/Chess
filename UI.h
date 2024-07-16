@@ -16,6 +16,8 @@ public:
 
     void draw ();
 
+    void drawForEngineTester (std::string engine1, std::string engine2, int winsEngine1, int winsEngine2, int draws);
+
     static int tileSize;
 private:
     std::shared_ptr<Piece> pieceOnHand;

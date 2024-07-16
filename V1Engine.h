@@ -2,13 +2,13 @@
 // Created by Elias on 06/07/2024.
 //
 
-#ifndef CHESS_ENGINE_H
-#define CHESS_ENGINE_H
+#ifndef CHESS_V1ENGINE_H
+#define CHESS_V1ENGINE_H
 
 
 #include "Move.h"
 
-class Engine
+class V1Engine
 {
 public:
     static int calculateMaterialDifference ();
@@ -21,4 +21,4 @@ public:
 };
 
 
-#endif //CHESS_ENGINE_H
+#endif //CHESS_V1ENGINE_H

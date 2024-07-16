@@ -29,12 +29,12 @@ bool King::isMoveLegal (int x, int y)
     {
         int rookX = 0;
         bool kingSideCastle = false;
-        if (x == this->getX() - 2)
+        if (x == this->getX() - 2 && y == this->getY())
         {
             rookX = 1;
             kingSideCastle = false;
         }
-        else if (x == this->getX() + 2)
+        else if (x == this->getX() + 2 && y == this->getY())
         {
             rookX = 8;
             kingSideCastle = true;
