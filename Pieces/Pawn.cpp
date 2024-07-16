@@ -72,16 +72,32 @@ bool Pawn::isMoveLegal (int x, int y)
 std::list<Move> Pawn::getLegalMoves ()
 {
     std::list<Move> legalMoves;
-    for (int i = 1; i < 9; i ++)
+    if (isWhite())
     {
-        for (int k = 1; k < 9; k ++)
+
+        for (int i = - 1; i < 2; i ++)
         {
-            if (isMoveLegal(i, k))
+            for (int k = 1; k < 3; k ++)
             {
-                legalMoves.emplace_back(this->getX(), this->getY(), i, k);
+                if (isMoveLegal(this->getX() + i, this->getY() + k))
+                {
+                    legalMoves.emplace_back(this->getX(), this->getY(), this->getX() + i, this->getY() + k);
+                }
             }
         }
     }
-
+    else
+    {
+        for (int i = - 1; i < 2; i ++)
+        {
+            for (int k = - 1; k > - 3; k --)
+            {
+                if (isMoveLegal(this->getX() + i, this->getY() + k))
+                {
+                    legalMoves.emplace_back(this->getX(), this->getY(), this->getX() + i, this->getY() + k);
+                }
+            }
+        }
+    }
     return legalMoves;
 }
