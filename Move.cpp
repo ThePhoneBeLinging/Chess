@@ -4,6 +4,7 @@
 
 #include "Move.h"
 #include "Board.h"
+#include "UI.h"
 
 int Move::getXFrom () const
 {
@@ -51,12 +52,14 @@ Move::Move (int xFrom, int yFrom, int xTo, int yTo)
     this->_xTo = xTo;
     this->_yFrom = yFrom;
     this->_yTo = yTo;
+    this->pieceToMove = Board::pieceOnSquare(this->getXFrom(), this->getYFrom());
+    this->pieceToMoveHadMoved = pieceToMove->isHasMoved();
+    this->pieceToCapture = Board::pieceOnSquare(this->getXTo(), this->getYTo());
+    this->rookInvolvedInCastle = nullptr;
 }
 
 void Move::execute ()
 {
-    this->pieceToMove = Board::pieceOnSquare(this->getXFrom(), this->getYFrom());
-    this->pieceToMoveHadMoved = pieceToMove->isHasMoved();
 
     if (pieceToMove->getValue() == 0)
     {
@@ -85,9 +88,6 @@ void Move::execute ()
             Board::whiteTurn = ! Board::whiteTurn;
         }
     }
-
-
-    this->pieceToCapture = Board::pieceOnSquare(this->getXTo(), this->getYTo());
     this->pieceToMove->move(this->getXTo(), this->getYTo());
 }
 
