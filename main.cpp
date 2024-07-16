@@ -34,7 +34,16 @@ int main ()
             }
             break;
         }
-        Engine::getBestMove()->execute();
+        auto t1 = std::chrono::high_resolution_clock::now();
+        Move *bestMove = Engine::getBestMove();
+        auto t2 = std::chrono::high_resolution_clock::now();
+        int amountOfMoves = Board::getAllLegalMoves().size();
+        auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+        std::cout << "Time per move: " << time.count() / amountOfMoves << std::endl;
+        std::cout << "Number of moves: " << amountOfMoves << std::endl;
+        std::cout << "Time to search: " << time.count() << std::endl;
+        std::cout << std::endl << std::endl << std::endl;
+        bestMove->execute();
         if (! Board::whiteTurn)
         {
 
