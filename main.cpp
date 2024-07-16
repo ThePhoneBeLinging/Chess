@@ -19,16 +19,14 @@ int main ()
         ui->draw();
         if (Board::getAllLegalMoves().empty())
         {
-            if (Board::whiteTurn)
+            Board::whiteTurn = ! Board::whiteTurn;
+            if (Board::isInCheck())
             {
-                if (Board::isInCheck())
+                if (Board::whiteTurn)
                 {
                     winner = 1;
                 }
-            }
-            else if (! Board::whiteTurn)
-            {
-                if (Board::isInCheck())
+                else
                 {
                     winner = - 1;
                 }
