@@ -97,38 +97,46 @@ std::list<Move> Board::getAllLegalMoves ()
 void Board::updateAllLegalMoves ()
 {
     Board::_moves.clear();
-    for (const std::shared_ptr<Piece> &piece: Board::_pieces)
+    auto pieces = Board::getPieces();
+    for (auto piece: pieces)
     {
-        if (piece->isWhite() != Board::whiteTurn)
+        if (piece->isWhite() != whiteTurn)
         { continue; }
-        for (Move move: piece->getLegalMoves())
+        std::list<Move> moves = piece->getLegalMoves();
+        for (Move move: moves)
         {
             move.execute();
-            bool legalMove = true;
-            for (auto king: Board::getPieces())
-            {
-                if (king->isWhite() == Board::whiteTurn)
-                { continue; }
-                if (king->getValue() == 0)
-                {
-                    for (auto otherPiece: Board::getPieces())
-                    {
-                        if (otherPiece->isWhite() != Board::whiteTurn)
-                        { continue; }
-                        if (otherPiece->isMoveLegal(king->getX(), king->getY()))
-                        {
-                            legalMove = false;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-            move.undo();
-            if (legalMove)
+            if (! Board::isInCheck())
             {
                 Board::_moves.push_back(move);
             }
+            move.undo();
         }
     }
+}
+
+bool Board::isInCheck ()
+{
+    bool inCheck = false;
+    auto pieces = Board::getPieces();
+    for (auto king: pieces)
+    {
+        if (king->isWhite() == Board::whiteTurn)
+        { continue; }
+        if (king->getValue() == 0)
+        {
+            for (auto otherPiece: pieces)
+            {
+                if (otherPiece->isWhite() != Board::whiteTurn)
+                { continue; }
+                if (otherPiece->isMoveLegal(king->getX(), king->getY()))
+                {
+                    inCheck = true;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    return inCheck;
 }

@@ -71,7 +71,7 @@ Move *Engine::getBestMove ()
     if (Board::whiteTurn)
     {
         auto maxIterator = maxMoves.begin();
-        for (int i = 0; i < rand() % maxMoves.size(); i ++)
+        for (int i = 0; i < random() % maxMoves.size(); i ++)
         {
             maxIterator ++;
         }
@@ -80,7 +80,7 @@ Move *Engine::getBestMove ()
     else
     {
         auto minIterator = minMoves.begin();
-        for (int i = 0; i < rand() % minMoves.size(); i ++)
+        for (int i = 0; i < random() % minMoves.size(); i ++)
         {
             minIterator ++;
         }

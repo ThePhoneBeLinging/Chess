@@ -25,11 +25,11 @@ public:
 
     static std::list<Move> getAllLegalMoves ();
 
-    static std::list<Move> getAllLegalMovesForPiece (const std::shared_ptr<Piece> &piece);
-
     static bool whiteTurn;
 
     static void updateAllLegalMoves ();
+
+    static bool isInCheck ();
 
 private:
     static std::list<std::shared_ptr<Piece>> _pieces;

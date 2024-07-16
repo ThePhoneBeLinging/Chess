@@ -41,8 +41,6 @@ void UI::draw ()
         }
     }
     char evaluationText[25];
-    //snprintf(evaluationText, sizeof(evaluationText), "Evaluation\n\n%d", Engine::getPositionEvaluation());
-    //DrawText(evaluationText, 12 * tileSize, 4 * tileSize, 15, WHITE);
 
     for (std::shared_ptr<Piece> piece: Board::getPieces())
     {
