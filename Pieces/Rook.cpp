@@ -67,12 +67,16 @@ std::list<Move> Rook::getLegalMoves ()
     std::list<Move> legalMoves;
     for (int i = 1; i < 9; i ++)
     {
-        for (int k = 1; k < 9; k ++)
+        if (isMoveLegal(i, this->getY()))
         {
-            if (isMoveLegal(i, k))
-            {
-                legalMoves.emplace_back(this->getX(), this->getY(), i, k);
-            }
+            legalMoves.emplace_back(this->getX(), this->getY(), i, this->getY());
+        }
+    }
+    for (int k = 1; k < 9; k ++)
+    {
+        if (isMoveLegal(this->getX(), k))
+        {
+            legalMoves.emplace_back(this->getX(), this->getY(), this->getX(), k);
         }
     }
 
