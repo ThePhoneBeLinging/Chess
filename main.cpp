@@ -50,7 +50,7 @@ int main ()
         if (! Board::whiteTurn)
         {
             auto t1 = std::chrono::high_resolution_clock::now();
-            Move *bestMove = V2Engine::getBestMove();
+            Move *bestMove = V1Engine::getBestMove();
             auto t2 = std::chrono::high_resolution_clock::now();
             int amountOfMoves = Board::getAllLegalMoves().size();
             auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);

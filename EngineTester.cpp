@@ -52,7 +52,7 @@ void EngineTester::testEngines ()
             {
                 Move *move;
                 auto t1 = std::chrono::high_resolution_clock::now();
-                if (Board::whiteTurn && i % 2 == 0)
+                if (Board::whiteTurn && i % 2 == 0 || ! Board::whiteTurn && i % 2 == 1)
                 {
                     int amountOfMoves = Board::getAllLegalMoves().size();
                     move = V1Engine::getBestMove();
@@ -83,14 +83,13 @@ void EngineTester::testEngines ()
                 ui->drawForEngineTester("V1", "V2", this->engine1Wins, this->engine2Wins, this->draws,
                                         this->avgTimeUsed1, this->avgTimeUsed2);
                 move->execute();
-                ui->drawForEngineTester("V1", "V2", this->engine1Wins, this->engine2Wins, this->draws,
-                                        this->avgTimeUsed1, this->avgTimeUsed2);
+
                 if (Board::getAllLegalMoves().empty() || movesSinceValueChange == 100)
                 {
                     Board::whiteTurn = ! Board::whiteTurn;
                     if (Board::isInCheck() && movesSinceValueChange != 100)
                     {
-                        if (Board::whiteTurn)
+                        if (Board::whiteTurn && i % 2 == 0 || ! Board::whiteTurn && i % 2 == 1)
                         {
                             this->engine1Wins ++;
                         }
