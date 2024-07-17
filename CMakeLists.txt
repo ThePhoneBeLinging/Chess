@@ -49,5 +49,6 @@ add_executable(Chess main.cpp
         TextureManager.cpp
         Engines/V2Engine.h
         Engines/V2Engine.cpp
+        Engines/V3Engine.cpp
 )
 target_link_libraries(${PROJECT_NAME} raylib)
