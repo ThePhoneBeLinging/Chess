@@ -49,11 +49,17 @@ void Move::setYTo (int yTo)
 
 Move::Move (int xFrom, int yFrom, int xTo, int yTo)
 {
+
     this->_xFrom = xFrom;
     this->_xTo = xTo;
     this->_yFrom = yFrom;
     this->_yTo = yTo;
     this->pieceToMove = Board::pieceOnSquare(this->getXFrom(), this->getYFrom());
+    if (pieceToMove == nullptr)
+    {
+        auto ui = new UI();
+        ui->draw();
+    }
     this->pieceToMoveHadMoved = pieceToMove->isHasMoved();
     this->pieceToCapture = Board::pieceOnSquare(this->getXTo(), this->getYTo());
     this->rookInvolvedInCastle = nullptr;
@@ -127,4 +133,9 @@ bool Move::equals (Move move)
 {
     return this->getXFrom() == move.getXFrom() && this->getYFrom() == move.getYFrom() &&
            this->getXTo() == move.getXTo() && this->getYTo() == move.getYTo();
+}
+
+bool Move::isCapture ()
+{
+    return this->pieceToCapture != nullptr;
 }

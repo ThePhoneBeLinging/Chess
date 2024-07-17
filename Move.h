@@ -39,6 +39,8 @@ public:
 
     bool equals (Move move);
 
+    bool isCapture ();
+
 private:
     int _xFrom;
     int _xTo;

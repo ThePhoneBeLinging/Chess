@@ -34,17 +34,16 @@ int V2Engine::calculateMaterialDifference ()
 
 Move *V2Engine::getBestMove ()
 {
-    int maxDepth = 0;
+    int maxDepth = 1;
     int minRating = INT32_MAX;
     int maxRating = INT32_MIN;
     std::list<Move> minMoves;
     std::list<Move> maxMoves;
     std::list<Move> moves = Board::getAllLegalMoves();
-    return moves.begin()->getMovePointerFromMove();
     for (Move move: moves)
     {
         move.execute();
-        int rating = recursiveMoveCalc(0, maxDepth);
+        int rating = recursiveMoveCalc(0, maxDepth, minRating, maxRating);
         if (rating > maxRating)
         {
             maxRating = rating;
@@ -71,8 +70,8 @@ Move *V2Engine::getBestMove ()
     }
     if (Board::whiteTurn)
     {
-        int value = rand() % maxMoves.size();
         auto maxIterator = maxMoves.begin();
+        int value = rand() % maxMoves.size();
         for (int i = 0; i < value; i ++)
         {
             maxIterator ++;
@@ -91,7 +90,7 @@ Move *V2Engine::getBestMove ()
     }
 }
 
-int V2Engine::recursiveMoveCalc (int depth, int maxDepth)
+int V2Engine::recursiveMoveCalc (int depth, int maxDepth, int minFound, int maxFound)
 {
     if (depth == maxDepth)
     {
@@ -118,10 +117,25 @@ int V2Engine::recursiveMoveCalc (int depth, int maxDepth)
         Board::whiteTurn = ! Board::whiteTurn;
         return 0;
     }
+    std::list<Move> updatedLegalMoves;
     for (Move move: legalMoves)
     {
+        if (! move.isCapture())
+        {
+            updatedLegalMoves.push_back(move);
+        }
+    }
+    for (Move move: legalMoves)
+    {
+        if (move.isCapture())
+        {
+            updatedLegalMoves.push_back(move);
+        }
+    }
+    for (Move move: updatedLegalMoves)
+    {
         move.execute();
-        int moveValue = recursiveMoveCalc(depth + 1, maxDepth);
+        int moveValue = recursiveMoveCalc(depth + 1, maxDepth, min, max);
         if (moveValue > max)
         {
             max = moveValue;
@@ -131,6 +145,16 @@ int V2Engine::recursiveMoveCalc (int depth, int maxDepth)
             min = moveValue;
         }
         move.undo();
+        if (minFound > min && ! Board::whiteTurn && minFound != INT32_MAX)
+        {
+            min = INT32_MIN;
+            break;
+        }
+        if (maxFound < max && Board::whiteTurn && maxFound != INT32_MIN)
+        {
+            max = INT32_MAX;
+            break;
+        }
     }
     if (Board::whiteTurn)
     { return max; }

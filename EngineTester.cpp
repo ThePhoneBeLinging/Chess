@@ -60,10 +60,9 @@ void EngineTester::testEngines ()
                     this->movesMade1 ++;
                     auto t2 = std::chrono::high_resolution_clock::now();
                     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-                    int timePerLegalMove = time.count();
+                    int timePerLegalMove = time.count() / amountOfMoves;
                     totalTime += timePerLegalMove;
-                    if (amountOfMoves >= 40)
-                    { this->avgTimeUsed1 = totalTime / this->movesMade1; }
+                    this->avgTimeUsed1 = totalTime / this->movesMade1;
                 }
                 else
                 {
@@ -73,10 +72,9 @@ void EngineTester::testEngines ()
                     this->movesMade2 ++;
                     auto t2 = std::chrono::high_resolution_clock::now();
                     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-                    int timePerLegalMove = time.count();
+                    int timePerLegalMove = time.count() / amountOfMoves;
                     totalTime += timePerLegalMove;
-                    if (amountOfMoves > 40)
-                    { this->avgTimeUsed2 = totalTime / this->movesMade2; }
+                    this->avgTimeUsed2 = totalTime / this->movesMade2;
                 }
 
 
@@ -84,10 +82,10 @@ void EngineTester::testEngines ()
                                         this->avgTimeUsed1, this->avgTimeUsed2);
                 move->execute();
 
-                if (Board::getAllLegalMoves().empty() || movesSinceValueChange == 100)
+                if (Board::getAllLegalMoves().empty() || movesSinceValueChange == 500)
                 {
                     Board::whiteTurn = ! Board::whiteTurn;
-                    if (Board::isInCheck() && movesSinceValueChange != 100)
+                    if (Board::isInCheck() && movesSinceValueChange != 500)
                     {
                         if (Board::whiteTurn && i % 2 == 0 || ! Board::whiteTurn && i % 2 == 1)
                         {

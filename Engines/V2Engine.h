@@ -17,7 +17,7 @@ public:
 
     static Move *getBestMove ();
 
-    static int recursiveMoveCalc (int depth, int maxDepth);
+    static int recursiveMoveCalc (int depth, int maxDepth, int minFound, int maxFound);
 };
 
 
