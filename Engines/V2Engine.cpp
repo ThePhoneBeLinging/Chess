@@ -34,9 +34,8 @@ int V2Engine::calculateMaterialDifference ()
     return totalValue;
 }
 
-Move *V2Engine::getBestMove ()
+Move *V2Engine::getBestMove (int maxDepth)
 {
-    int maxDepth = 1;
     int minRating = INT32_MAX;
     int maxRating = INT32_MIN;
     std::list<Move> minMoves;

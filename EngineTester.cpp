@@ -7,6 +7,7 @@
 #include "Engines/V1Engine.h"
 #include "UI.h"
 #include "Engines/V2Engine.h"
+#include "Engines/V3Engine.h"
 #include <iostream>
 #include <chrono>
 
@@ -40,6 +41,8 @@ int EngineTester::getEngine2Wins () const
 
 void EngineTester::testEngines ()
 {
+    int maxDepth = 1;
+    int movesToDraw = 100;
     int movesSinceValueChange = 0;
     int lastValue = 0;
     UI *ui = new UI();
@@ -56,7 +59,7 @@ void EngineTester::testEngines ()
                 if (Board::whiteTurn && i % 2 == 0 || ! Board::whiteTurn && i % 2 == 1)
                 {
                     int amountOfMoves = Board::getAllLegalMoves().size();
-                    move = V1Engine::getBestMove();
+                    move = V2Engine::getBestMove(maxDepth);
                     int totalTime = this->avgTimeUsed1 * movesMade1;
                     this->movesMade1 ++;
                     auto t2 = std::chrono::high_resolution_clock::now();
@@ -68,7 +71,7 @@ void EngineTester::testEngines ()
                 else
                 {
                     int amountOfMoves = Board::getAllLegalMoves().size();
-                    move = V2Engine::getBestMove();
+                    move = V3Engine::getBestMove(maxDepth);
                     int totalTime = this->avgTimeUsed2 * movesMade2;
                     this->movesMade2 ++;
                     auto t2 = std::chrono::high_resolution_clock::now();
@@ -77,14 +80,14 @@ void EngineTester::testEngines ()
                     totalTime += timePerLegalMove;
                     this->avgTimeUsed2 = totalTime / this->movesMade2;
                 }
-                ui->drawForEngineTester("V1", "V2", this->engine1Wins, this->engine2Wins, this->draws,
+                ui->drawForEngineTester("V2", "V3", this->engine1Wins, this->engine2Wins, this->draws,
                                         this->avgTimeUsed1, this->avgTimeUsed2);
                 move->execute();
 
-                if (Board::getAllLegalMoves().empty() || movesSinceValueChange == 500)
+                if (Board::getAllLegalMoves().empty() || movesSinceValueChange == movesToDraw)
                 {
                     Board::whiteTurn = ! Board::whiteTurn;
-                    if (Board::isInCheck() && movesSinceValueChange != 500)
+                    if (Board::isInCheck() && movesSinceValueChange != movesToDraw)
                     {
                         if (Board::whiteTurn && i % 2 == 0 || ! Board::whiteTurn && i % 2 == 1)
                         {

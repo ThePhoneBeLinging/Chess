@@ -18,7 +18,9 @@ int main ()
     SetTargetFPS(60);
     UI *ui = new UI();
     TextureManager::loadTextures();
+    ui->draw();
     Board::startGame();
+    ui->draw();
     int winner = 5;
     if (toTestEngines)
     {
@@ -51,7 +53,7 @@ int main ()
         if (! Board::whiteTurn)
         {
             auto t1 = std::chrono::high_resolution_clock::now();
-            Move *bestMove = V1Engine::getBestMove();
+            Move *bestMove = V1Engine::getBestMove(2);
             auto t2 = std::chrono::high_resolution_clock::now();
             int amountOfMoves = Board::getAllLegalMoves().size();
             auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
