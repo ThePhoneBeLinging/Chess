@@ -11,7 +11,7 @@
 int V2Engine::getPositionEvaluation ()
 {
     int totalEval = calculateMaterialDifference();
-    totalEval *= 10;
+    //totalEval *= 100;
     return totalEval;
 }
 
@@ -22,11 +22,13 @@ int V2Engine::calculateMaterialDifference ()
     {
         if (piece->isWhite())
         {
-            totalValue += piece->getValue();
+            totalValue += piece->getValue() * 10;
+            totalValue += piece->getLegalMoves().size();
         }
         else
         {
-            totalValue -= piece->getValue();
+            totalValue -= piece->getValue() * 10;
+            totalValue -= piece->getLegalMoves().size();
         }
     }
     return totalValue;
@@ -147,13 +149,13 @@ int V2Engine::recursiveMoveCalc (int depth, int maxDepth, int minFound, int maxF
         move.undo();
         if (minFound > min && ! Board::whiteTurn && minFound != INT32_MAX)
         {
-            min = INT32_MIN;
-            break;
+            //min = INT32_MIN;
+            //break;
         }
         if (maxFound < max && Board::whiteTurn && maxFound != INT32_MIN)
         {
-            max = INT32_MAX;
-            break;
+            //max = INT32_MAX;
+            //break;
         }
     }
     if (Board::whiteTurn)
