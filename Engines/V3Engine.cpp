@@ -45,12 +45,12 @@ Move *V3Engine::getBestMove (int maxDepth)
     {
         move.execute();
         int rating = recursiveMoveCalc(0, maxDepth, minRating, maxRating);
-        if (rating > maxRating)
+        if (rating > maxRating && rating != INT32_MAX)
         {
             maxRating = rating;
             maxMoves.clear();
         }
-        if (minRating > rating)
+        if (minRating > rating && rating != INT32_MIN)
         {
             minRating = rating;
             minMoves.clear();
@@ -108,11 +108,11 @@ int V3Engine::recursiveMoveCalc (int depth, int maxDepth, int minFound, int maxF
             Board::whiteTurn = ! Board::whiteTurn;
             if (Board::whiteTurn)
             {
-                return INT32_MIN;
+                return INT32_MIN + 1;
             }
             else
             {
-                return INT32_MAX;
+                return INT32_MAX - 1;
             }
         }
         Board::whiteTurn = ! Board::whiteTurn;
@@ -137,6 +137,7 @@ int V3Engine::recursiveMoveCalc (int depth, int maxDepth, int minFound, int maxF
     {
         move.execute();
         int moveValue = recursiveMoveCalc(depth + 1, maxDepth, min, max);
+        move.undo();
         if (moveValue > max)
         {
             max = moveValue;
@@ -145,17 +146,15 @@ int V3Engine::recursiveMoveCalc (int depth, int maxDepth, int minFound, int maxF
         {
             min = moveValue;
         }
-        move.undo();
         if (minFound > min && ! Board::whiteTurn && minFound != INT32_MAX)
         {
-            //min = INT32_MIN;
-            //break;
+            return INT32_MIN;
         }
         if (maxFound < max && Board::whiteTurn && maxFound != INT32_MIN)
         {
-            //max = INT32_MAX;
-            //break;
+            return INT32_MAX;
         }
+
     }
     if (Board::whiteTurn)
     { return max; }
