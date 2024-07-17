@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include "Pieces/Piece.h"
 #include "Pieces/Rook.h"
 #include "Pieces/King.h"

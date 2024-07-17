@@ -8,6 +8,7 @@
 #include "UI.h"
 #include "Engines/V2Engine.h"
 #include <iostream>
+#include <chrono>
 
 EngineTester::EngineTester ()
 {
