@@ -30,8 +30,10 @@ bool Queen::isMoveLegal (int x, int y)
 
 void Queen::move (int x, int y)
 {
-    mRook->move(x, y);
-    mBishop->move(x, y);
+    mRook->setX(x);
+    mRook->setY(y);
+    mBishop->setX(x);
+    mBishop->setY(y);
     Piece::move(x, y);
 }
 

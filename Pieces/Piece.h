@@ -41,6 +41,10 @@ public:
 
     virtual std::list<Move> getLegalMoves () = 0;
 
+    void setX (int x);
+
+    void setY (int y);
+
 private:
     int _x;
     int _y;

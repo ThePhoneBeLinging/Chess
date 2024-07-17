@@ -99,3 +99,13 @@ void Piece::setValue (int value)
 {
     Piece::value = value;
 }
+
+void Piece::setX (int x)
+{
+    _x = x;
+}
+
+void Piece::setY (int y)
+{
+    _y = y;
+}

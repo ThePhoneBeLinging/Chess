@@ -76,8 +76,6 @@ void EngineTester::testEngines ()
                     totalTime += timePerLegalMove;
                     this->avgTimeUsed2 = totalTime / this->movesMade2;
                 }
-
-
                 ui->drawForEngineTester("V1", "V2", this->engine1Wins, this->engine2Wins, this->draws,
                                         this->avgTimeUsed1, this->avgTimeUsed2);
                 move->execute();
